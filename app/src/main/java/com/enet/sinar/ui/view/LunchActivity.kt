@@ -1,11 +1,25 @@
-package com.enet.sinar.ui.view
-
-import androidx.compose.ui.graphics.Color
-
-enum class StudentLunchActivity {
-    login,
-    register,
-    home
+// App Sections / User Roles
+enum class AppSection {
+    General,
+    Student,
+    Staff,
+    Citizen
 }
 
+enum class GeneralRoutes {
+     Splash,
+     Login,
+     AboutUs,
+}
 
+enum class StudentRoutes {
+     Home,
+}
+
+enum class StaffRoutes {
+    Home,
+}
+
+enum class CitizenRoutes {
+    Home,
+}

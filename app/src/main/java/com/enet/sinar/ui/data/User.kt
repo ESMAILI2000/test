@@ -1,2 +1,2 @@
-package com.enet.sinar.ui.data
+package com.sinar.sinar.ui.data
 
