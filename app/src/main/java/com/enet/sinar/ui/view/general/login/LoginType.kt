@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.login
+package com.enet.sinar.ui.view.general.login
 
 enum class LoginType {
     CitizenLogin,

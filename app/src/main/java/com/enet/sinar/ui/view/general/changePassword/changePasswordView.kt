@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.changePassword
+package com.enet.sinar.ui.view.general.changePassword
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -53,18 +53,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.R
-import com.sinar.sinar.ui.theme.Background
-import com.sinar.sinar.ui.theme.Err
-import com.sinar.sinar.ui.theme.GrayA
-import com.sinar.sinar.ui.theme.GrayC
-import com.sinar.sinar.ui.theme.GrayE
-import com.sinar.sinar.ui.theme.GrayF
-import com.sinar.sinar.ui.theme.Gunmetal
-import com.sinar.sinar.ui.theme.NationsBlue
-import com.sinar.sinar.ui.theme.SinarTheme
-import com.sinar.sinar.ui.theme.Succes
-import com.sinar.sinar.ui.view.custom_view.BoxedTextInput
+import com.enet.sinar.R
+import com.enet.sinar.ui.theme.Background
+import com.enet.sinar.ui.theme.Err
+import com.enet.sinar.ui.theme.GrayA
+import com.enet.sinar.ui.theme.GrayC
+import com.enet.sinar.ui.theme.GrayE
+import com.enet.sinar.ui.theme.GrayF
+import com.enet.sinar.ui.theme.Gunmetal
+import com.enet.sinar.ui.theme.NationsBlue
+import com.enet.sinar.ui.theme.SinarTheme
+import com.enet.sinar.ui.theme.Succes
+import com.enet.sinar.ui.view.custom_view.BoxedTextInput
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)

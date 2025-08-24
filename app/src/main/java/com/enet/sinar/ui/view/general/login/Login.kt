@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.login
+package com.enet.sinar.ui.view.general.login
 
 import AppSection
 import androidx.compose.foundation.Image
@@ -55,19 +55,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.R
-import com.sinar.sinar.ui.theme.Background
-import com.sinar.sinar.ui.theme.Blue200
-import com.sinar.sinar.ui.theme.GrayA
-import com.sinar.sinar.ui.theme.GrayC
-import com.sinar.sinar.ui.theme.GrayE
-import com.sinar.sinar.ui.theme.GrayF
-import com.sinar.sinar.ui.theme.Gunmetal
-import com.sinar.sinar.ui.theme.Primary
-import com.sinar.sinar.ui.theme.SinarTheme
-import com.sinar.sinar.ui.utility.MySharedPreferences.getIsEn
-import com.sinar.sinar.ui.utility.MySharedPreferences.setIsEn
-import com.sinar.sinar.ui.view.setAppLocale
+import com.enet.sinar.R
+import com.enet.sinar.ui.theme.Background
+import com.enet.sinar.ui.theme.Blue200
+import com.enet.sinar.ui.theme.GrayA
+import com.enet.sinar.ui.theme.GrayC
+import com.enet.sinar.ui.theme.GrayE
+import com.enet.sinar.ui.theme.GrayF
+import com.enet.sinar.ui.theme.Gunmetal
+import com.enet.sinar.ui.theme.Primary
+import com.enet.sinar.ui.theme.SinarTheme
+import com.enet.sinar.ui.utility.MySharedPreferences.getIsEn
+import com.enet.sinar.ui.utility.MySharedPreferences.setIsEn
+import com.enet.sinar.ui.view.setAppLocale
 
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.wallet
+package com.enet.sinar.ui.view.general.wallet
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -35,14 +35,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.R
-import com.sinar.sinar.ui.theme.Background
-import com.sinar.sinar.ui.theme.GrayB
-import com.sinar.sinar.ui.theme.GrayF
-import com.sinar.sinar.ui.theme.Gunmetal
-import com.sinar.sinar.ui.theme.NationsBlue
-import com.sinar.sinar.ui.theme.PoliceBlue
-import com.sinar.sinar.ui.theme.SinarTheme
+import com.enet.sinar.R
+import com.enet.sinar.ui.theme.Background
+import com.enet.sinar.ui.theme.GrayB
+import com.enet.sinar.ui.theme.GrayF
+import com.enet.sinar.ui.theme.Gunmetal
+import com.enet.sinar.ui.theme.NationsBlue
+import com.enet.sinar.ui.theme.PoliceBlue
+import com.enet.sinar.ui.theme.SinarTheme
 
 @Composable
 fun WalletWordsScreen(modifier: Modifier = Modifier) {

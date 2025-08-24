@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view
+package com.enet.sinar.ui.view
 
 import AppSection
 import CitizenRoutes
@@ -19,11 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.sinar.sinar.ui.theme.SinarTheme
-import com.sinar.sinar.ui.view.general.login.LoginScreen
-import com.sinar.sinar.ui.view.general.splash.SplashScreen
-import com.sinar.sinar.ui.view.staff.StaffHomeScreen
-import com.sinar.sinar.ui.view.student.home.StudentHomeScreen
+import com.enet.sinar.ui.theme.SinarTheme
+import com.enet.sinar.ui.view.general.login.LoginScreen
+import com.enet.sinar.ui.view.general.splash.SplashScreen
+import com.enet.sinar.ui.view.staff.StaffHomeScreen
+import com.enet.sinar.ui.view.student.home.StudentHomeScreen
 
 
 @Suppress("DEPRECATION")

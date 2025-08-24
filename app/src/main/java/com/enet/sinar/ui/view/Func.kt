@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view
+package com.enet.sinar.ui.view
 
 import android.content.Context
 import androidx.compose.foundation.layout.Box
@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.ui.theme.NationsBlue
+import com.enet.sinar.ui.theme.NationsBlue
 import java.util.Locale
 
 

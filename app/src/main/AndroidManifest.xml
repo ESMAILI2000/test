@@ -9,7 +9,7 @@
         android:testOnly="true"
         android:theme="@style/Theme.Atisel"
         tools:targetApi="31">
-        <activity android:name="com.sinar.sinar.ui.view.MainActivity"
+        <activity android:name="com.enet.sinar.ui.view.MainActivity"
             android:clearTaskOnLaunch="true"
             android:exported="true"
             android:stateNotNeeded="true">

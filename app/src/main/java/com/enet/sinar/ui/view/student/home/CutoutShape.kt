@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.student.home
+package com.enet.sinar.ui.view.student.home
 
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline

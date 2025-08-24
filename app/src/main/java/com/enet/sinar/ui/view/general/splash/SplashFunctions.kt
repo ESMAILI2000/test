@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.splash
+package com.enet.sinar.ui.view.general.splash
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.rotate
-import com.sinar.sinar.ui.theme.NationsBlue
+import com.enet.sinar.ui.theme.NationsBlue
 
 @Composable
 fun CustomLoadingIndicator(

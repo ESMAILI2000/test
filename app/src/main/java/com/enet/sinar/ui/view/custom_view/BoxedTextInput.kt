@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.custom_view
+package com.enet.sinar.ui.view.custom_view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,7 +38,7 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.ui.theme.Background
+import com.enet.sinar.ui.theme.Background
 
 @Composable
 fun BoxedTextInput(

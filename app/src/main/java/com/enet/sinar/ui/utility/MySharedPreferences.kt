@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.utility
+package com.enet.sinar.ui.utility
 
 import android.content.Context
 

@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.login
+package com.enet.sinar.ui.view.general.login
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -27,10 +27,10 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.R
-import com.sinar.sinar.ui.theme.Background
-import com.sinar.sinar.ui.theme.GrayC
-import com.sinar.sinar.ui.theme.Primary
+import com.enet.sinar.R
+import com.enet.sinar.ui.theme.Background
+import com.enet.sinar.ui.theme.GrayC
+import com.enet.sinar.ui.theme.Primary
 
 // تغیر صفحه لاگین از شهروند به دانشگاهی و بالعکس
 @Composable

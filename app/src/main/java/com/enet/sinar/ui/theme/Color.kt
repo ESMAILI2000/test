@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.theme
+package com.enet.sinar.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

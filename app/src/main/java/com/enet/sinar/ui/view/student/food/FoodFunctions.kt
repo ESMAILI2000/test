@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.student.food
+package com.enet.sinar.ui.view.student.food
 
 import androidx.compose.ui.graphics.painter.Painter
 

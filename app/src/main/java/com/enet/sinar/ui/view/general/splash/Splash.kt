@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.splash
+package com.enet.sinar.ui.view.general.splash
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -22,10 +22,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.R
-import com.sinar.sinar.ui.theme.GrayF
-import com.sinar.sinar.ui.theme.Gunmetal
-import com.sinar.sinar.ui.theme.SinarTheme
+import com.enet.sinar.R
+import com.enet.sinar.ui.theme.GrayF
+import com.enet.sinar.ui.theme.Gunmetal
+import com.enet.sinar.ui.theme.SinarTheme
 import kotlinx.coroutines.delay
 
 @Composable

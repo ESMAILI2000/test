@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.view.general.transaction
+package com.enet.sinar.ui.view.general.transaction
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -37,20 +37,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.R
-import com.sinar.sinar.ui.theme.Background
-import com.sinar.sinar.ui.theme.Err
-import com.sinar.sinar.ui.theme.GrayB
-import com.sinar.sinar.ui.theme.GrayD
-import com.sinar.sinar.ui.theme.Gunmetal
-import com.sinar.sinar.ui.theme.NationsBlue
-import com.sinar.sinar.ui.theme.PoliceBlue
-import com.sinar.sinar.ui.theme.SinarTheme
-import com.sinar.sinar.ui.theme.Succes
-import com.sinar.sinar.ui.theme.Water
-import com.sinar.sinar.ui.theme.White
-import com.sinar.sinar.ui.view.DashedContainer
-import com.sinar.sinar.ui.view.EllipsizedMiddleText
+import com.enet.sinar.R
+import com.enet.sinar.ui.theme.Background
+import com.enet.sinar.ui.theme.Err
+import com.enet.sinar.ui.theme.GrayB
+import com.enet.sinar.ui.theme.GrayD
+import com.enet.sinar.ui.theme.Gunmetal
+import com.enet.sinar.ui.theme.NationsBlue
+import com.enet.sinar.ui.theme.PoliceBlue
+import com.enet.sinar.ui.theme.SinarTheme
+import com.enet.sinar.ui.theme.Succes
+import com.enet.sinar.ui.theme.Water
+import com.enet.sinar.ui.theme.White
+import com.enet.sinar.ui.view.DashedContainer
+import com.enet.sinar.ui.view.EllipsizedMiddleText
 
 @Composable
 fun HistoryTransactionScreen(modifier: Modifier = Modifier){

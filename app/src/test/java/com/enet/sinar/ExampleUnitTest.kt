@@ -1,4 +1,4 @@
-package com.sinar.sinar
+package com.enet.sinar
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.sinar.sinar.ui.theme
+package com.enet.sinar.ui.theme
 
 import android.os.Build
 import androidx.compose.material3.Typography
@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.sinar.sinar.R
+import com.enet.sinar.R
 
 
 
