@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,9 +24,11 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -36,6 +40,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -47,22 +52,30 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.enet.sinar.R
 import com.enet.sinar.ui.theme.Background
 import com.enet.sinar.ui.theme.EerieBlack
+import com.enet.sinar.ui.theme.Err
 import com.enet.sinar.ui.theme.Gray04
 import com.enet.sinar.ui.theme.GrayC
 import com.enet.sinar.ui.theme.GrayD
+import com.enet.sinar.ui.theme.GrayE
+import com.enet.sinar.ui.theme.GrayF
 import com.enet.sinar.ui.theme.Gunmetal
 import com.enet.sinar.ui.theme.NationsBlue
 import com.enet.sinar.ui.theme.PoliceBlue
@@ -70,21 +83,344 @@ import com.enet.sinar.ui.theme.SinarTheme
 import com.enet.sinar.ui.theme.Succes
 import com.enet.sinar.ui.theme.Water
 import com.enet.sinar.ui.theme.White
-import com.enet.sinar.ui.view.DashedContainer
-import com.enet.sinar.ui.view.EllipsizedMiddleText
-import com.enet.sinar.ui.view.student.home.HexagonShape
+import com.enet.sinar.ui.view.custom_view.DashedContainer
+import com.enet.sinar.ui.view.custom_view.EllipsizedMiddleText
+import com.enet.sinar.ui.view.custom_view.EllipsizedMiddleTextPreview
+import com.enet.sinar.ui.view.custom_view.HexagonShape
+
 
 @Composable
-fun BankScreen(modifier: Modifier = Modifier){
+fun ExchangeScreen(modifier: Modifier = Modifier){
 
-    var state by remember { mutableStateOf(3) } // 0-> انتقال توکن  1-> خرید توکن  2-> فروش توکن  3-> شارژ باتری
+    var state by remember { mutableStateOf(0) } // 0-> انتقال توکن  1-> خرید توکن  2-> فروش توکن  3-> شارژ باتری
+
 
     var isBatriLowRadio by remember { mutableStateOf(false) }
+    var isDialogTransactionSuccess by remember { mutableStateOf(false) }
+    var isDialogBuySuccess by remember { mutableStateOf(false) }
+    var isDialogSellSuccess by remember { mutableStateOf(true) }
     var isCardLowRadio by remember { mutableStateOf(true) }
     var amountToken by remember { mutableStateOf("") }
     var walletAddress by remember { mutableStateOf("") }
     var cardNumber by remember { mutableStateOf("") }
 
+
+
+    val itemsOffers = listOf(
+        OffersItem(3,"sinar",160,30,50),
+        OffersItem(50,"avsin",15,40,5),
+    )
+
+    // دیالوگ انتقال موفقیت آمیز توکن
+    if (isDialogTransactionSuccess){
+            Dialog(
+                onDismissRequest = {
+                    isDialogTransactionSuccess = false
+                }
+            ) {
+                    Column(
+                        modifier = Modifier
+                            .width(364.dp)
+                            .background(White, RoundedCornerShape(32.dp)),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "" ,
+                            tint = EerieBlack,
+                            modifier = Modifier
+                                .align(Alignment.Start)
+                                .padding(start = 16.dp, top = 16.dp)
+                                .size(24.dp)
+                                .pointerInput(Unit){
+                                    detectTapGestures {
+                                        isDialogTransactionSuccess = false
+                                    }
+                                }
+                        )
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Image(
+                                painter = painterResource(id = R.drawable.vc_success),
+                                contentDescription = "",
+                                Modifier.size(68.dp)
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Text(
+                                text = stringResource(id = R.string.transfer_successfully),
+                                style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
+                                color = Gunmetal
+                            )
+
+                            Spacer(modifier = Modifier.height(16.dp))
+
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.transaction_serial),
+                                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
+                                    color = PoliceBlue
+                                )
+                                EllipsizedMiddleText(
+                                    text = "0x5A141B7eba38A151EDfcd816D912E6ae5C0307b1",
+                                    startLength = 8,
+                                    endLength = 7,
+                                    maxLines = 1,
+                                    color = PoliceBlue,
+                                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
+                                )
+                                Icon(
+                                    painter = painterResource(id = R.drawable.vc_serial),
+                                    contentDescription = "",
+                                    tint = PoliceBlue,
+                                   modifier =  Modifier.size(24.dp)
+                                )
+
+                            }
+
+                            Spacer(modifier = Modifier.height(24.dp))
+
+                            Button(
+                                onClick = {},
+                                Modifier
+                                    .size(332.dp, 56.dp),
+                                shape = RoundedCornerShape(12.dp),
+                                colors = ButtonDefaults. buttonColors(
+                                    containerColor = NationsBlue,
+                                    contentColor = Color.White,
+                                )
+                            ) {
+                                Text(stringResource(id = R.string.view_explorer),
+                                    fontFamily = FontFamily(Font(R.font.ir_medium)),
+                                    fontSize = 14.sp)
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Icon(painter = painterResource(id = R.drawable.vc_world) , contentDescription = null )
+                            }
+
+                            Spacer(modifier = Modifier.size(16.dp))
+                        }
+                    }
+        }
+    }
+
+    // دیالوگ خرید موفقیت آمیز توکن
+    if (isDialogBuySuccess){
+        Dialog(
+            onDismissRequest = {
+                isDialogBuySuccess = false
+            }
+        ) {
+            Column(
+                modifier = Modifier
+                    .width(364.dp)
+                    .background(White, RoundedCornerShape(32.dp)),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "" ,
+                    tint = EerieBlack,
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                        .padding(start = 16.dp, top = 16.dp)
+                        .size(24.dp)
+                        .pointerInput(Unit){
+                            detectTapGestures {
+                                isDialogBuySuccess = false
+                            }
+                        }
+                )
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.vc_success),
+                        contentDescription = "",
+                        Modifier.size(68.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(id = R.string.buy_successfully),
+                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
+                        color = Gunmetal
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.transaction_serial),
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
+                            color = PoliceBlue
+                        )
+                        EllipsizedMiddleText(
+                            text = "0x5A141B7eba38A151EDfcd816D912E6ae5C0307b1",
+                            startLength = 8,
+                            endLength = 7,
+                            maxLines = 1,
+                            color = PoliceBlue,
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
+                        )
+                        Icon(
+                            painter = painterResource(id = R.drawable.vc_serial),
+                            contentDescription = "",
+                            tint = PoliceBlue,
+                            modifier =  Modifier.size(24.dp)
+                        )
+
+                    }
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    Button(
+                        onClick = {},
+                        Modifier
+                            .size(332.dp, 56.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults. buttonColors(
+                            containerColor = NationsBlue,
+                            contentColor = Color.White,
+                        )
+                    ) {
+                        Text(stringResource(id = R.string.view_explorer),
+                            fontFamily = FontFamily(Font(R.font.ir_medium)),
+                            fontSize = 14.sp)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Icon(painter = painterResource(id = R.drawable.vc_world) , contentDescription = null )
+                    }
+
+                    Spacer(modifier = Modifier.size(16.dp))
+                }
+            }
+        }
+    }
+
+    // دیالوگ فروش موفقیت آمیز توکن
+    if (isDialogSellSuccess){
+        Dialog(
+            onDismissRequest = {
+                isDialogSellSuccess = false
+            }
+        ) {
+            Column(
+                modifier = Modifier
+                    .width(364.dp)
+                    .background(White, RoundedCornerShape(32.dp)),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "" ,
+                    tint = EerieBlack,
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                        .padding(start = 16.dp, top = 16.dp)
+                        .size(24.dp)
+                        .pointerInput(Unit){
+                            detectTapGestures {
+                                isDialogSellSuccess = false
+                            }
+                        }
+                )
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.vc_success),
+                        contentDescription = "",
+                        Modifier.size(68.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = stringResource(id = R.string.sell_successfully),
+                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
+                        color = Gunmetal
+                    )
+
+                    Spacer(modifier = Modifier.height(4.dp))
+
+                    Text(
+                        text = stringResource(id = R.string.transaction_deposit),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = GrayF
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Text(
+                        text = stringResource(id = R.string.deposit_notification),
+                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
+                        color = PoliceBlue,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth(0.8f)
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.transaction_serial),
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
+                            color = PoliceBlue
+                        )
+                        EllipsizedMiddleText(
+                            text = "0x5A141B7eba38A151EDfcd816D912E6ae5C0307b1",
+                            startLength = 8,
+                            endLength = 7,
+                            maxLines = 1,
+                            color = PoliceBlue,
+                            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
+                        )
+                        Icon(
+                            painter = painterResource(id = R.drawable.vc_serial),
+                            contentDescription = "",
+                            tint = PoliceBlue,
+                            modifier =  Modifier.size(24.dp)
+                        )
+
+                    }
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    Button(
+                        onClick = {},
+                        Modifier
+                            .size(332.dp, 56.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults. buttonColors(
+                            containerColor = NationsBlue,
+                            contentColor = Color.White,
+                        )
+                    ) {
+                        Text(stringResource(id = R.string.view_explorer),
+                            fontFamily = FontFamily(Font(R.font.ir_medium)),
+                            fontSize = 14.sp)
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Icon(painter = painterResource(id = R.drawable.vc_world) , contentDescription = null )
+                    }
+
+                    Spacer(modifier = Modifier.size(16.dp))
+                }
+            }
+        }
+    }
+
+    // محتوای اصلی صفحه
     Box(modifier = Modifier
         .fillMaxSize()
         .background(Background)
@@ -99,7 +435,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                 .size(24.dp)
         )
         Text(
-            text = "صرافی",
+            text = stringResource(id = R.string.exchange),
             style = MaterialTheme.typography.displayLarge.copy(fontSize = 16.sp),
             modifier = Modifier
                 .padding(horizontal = 24.dp, vertical = 16.dp)
@@ -158,7 +494,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                     }
 
                     Text(
-                        text = stringResource(id = R.string.battery_charging_button),
+                        text = stringResource(id = R.string.battery_charging),
                         style = MaterialTheme.typography.labelSmall,
                         color = if (state == 3) NationsBlue else GrayD
                     )
@@ -201,7 +537,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                     }
 
                     Text(
-                        text = stringResource(id = R.string.token_sell_button),
+                        text = stringResource(id = R.string.token_sell),
                         style = MaterialTheme.typography.labelSmall,
                         color = if (state == 2) NationsBlue else GrayD
                     )
@@ -244,7 +580,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                     }
 
                     Text(
-                        text = stringResource(id = R.string.token_buy_button),
+                        text = stringResource(id = R.string.token_buy),
                         style = MaterialTheme.typography.labelSmall,
                         color = if (state == 1) NationsBlue else GrayD
                     )
@@ -287,7 +623,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                     }
 
                     Text(
-                        text = stringResource(id = R.string.token_transfer_button),
+                        text = stringResource(id = R.string.token_transfer),
                         style = MaterialTheme.typography.labelSmall,
                         color = if (state == 0) NationsBlue else GrayD
                         )
@@ -358,7 +694,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.End
                         ){
-                            Text(text = "توکن از حساب",
+                            Text(text = stringResource(id = R.string.token_from_account),
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = PoliceBlue
                             )
@@ -397,11 +733,11 @@ fun BankScreen(modifier: Modifier = Modifier){
                             Modifier.width(292.dp),
                             horizontalArrangement = Arrangement.End
                         ) {
-                            Text(text = " (سینار)",
+                            Text(text = " (${stringResource(id = R.string.app_name)})",
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = NationsBlue)
 
-                            Text(text = " : مقدار توکن",
+                            Text(text = stringResource(id = R.string.token_amount_for_charging),
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = PoliceBlue)
                         }
@@ -426,7 +762,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                             colors =  TextFieldDefaults.colors(
                                 focusedContainerColor = NationsBlue.copy(alpha = 0.1f),
                                 unfocusedContainerColor = NationsBlue.copy(alpha = 0.1f),
-                                focusedTextColor = Gunmetal,
+                                focusedTextColor = NationsBlue,
                                 unfocusedTextColor = Gunmetal,
                                 focusedIndicatorColor = Color.Transparent,
                                 unfocusedIndicatorColor = Color.Transparent
@@ -454,7 +790,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                             )
                         ) {
                             Text(
-                                text = stringResource(id = R.string.battery_charging_button),
+                                text = stringResource(id = R.string.battery_charging),
                                 fontFamily = FontFamily(Font(R.font.ir_medium)),
                                 fontSize = 14.sp)
                             Spacer(modifier = Modifier.width(8.dp))
@@ -490,16 +826,16 @@ fun BankScreen(modifier: Modifier = Modifier){
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.logo),
+                                painter = painterResource(id = R.drawable.ic_discount),
                                 contentDescription = "",
                                 modifier = Modifier.size(24.dp)
                             )
-                            Text(text = "پیشنهادات ویژه",
+                            Text(text = stringResource(id = R.string.special_offers),
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = Gunmetal
                             )
                             Image(
-                                painter = painterResource(id = R.drawable.logo),
+                                painter = painterResource(id = R.drawable.ic_discount),
                                 contentDescription = "",
                                 modifier = Modifier.size(24.dp)
                             )
@@ -516,7 +852,89 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 .width(292.dp),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.spacedBy(16.dp)
-                        ){
+                        ){ items(itemsOffers.size) { page ->
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.spacedBy(2.dp)
+                            ) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.ic_battery),
+                                        contentDescription = "",
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                    Text(text = itemsOffers[page].firstCount.toString(),
+                                        style = MaterialTheme.typography.displayMedium.copy(
+                                            fontSize = 14.sp
+                                        ),
+                                        color = Gunmetal
+                                    )
+                                    Text(text = itemsOffers[page].firstText,
+                                        style = MaterialTheme.typography.displayMedium.copy(fontSize = 14.sp),
+                                        color = Gunmetal
+                                    )
+
+                                }
+
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(40.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                   Row(
+                                       horizontalArrangement = Arrangement.spacedBy(2.dp),
+                                       verticalAlignment = Alignment.CenterVertically
+                                   ) {
+                                       Text(
+                                           text = itemsOffers[page].trxCount.toString(),
+                                           style = MaterialTheme.typography.displayMedium,
+                                           color = PoliceBlue,
+                                       )
+                                       Text(
+                                           text = "TRX",
+                                           style = MaterialTheme.typography.displayMedium,
+                                           color = PoliceBlue,
+                                       )
+                                   }
+
+                                    Row(
+                                        horizontalArrangement = Arrangement.spacedBy(2.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = itemsOffers[page].smartContractCount.toString(),
+                                            style = MaterialTheme.typography.displayMedium,
+                                            color = PoliceBlue,
+                                        )
+                                        Text(
+                                            text = "Smart Contract",
+                                            style = MaterialTheme.typography.displayMedium,
+                                            color = PoliceBlue,
+                                        )
+                                    }
+
+                                    Row(
+                                        horizontalArrangement = Arrangement.spacedBy(2.dp),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Text(
+                                            text = itemsOffers[page].nftCount.toString(),
+                                            style = MaterialTheme.typography.displayMedium,
+                                            color = PoliceBlue,
+                                        )
+                                        Text(
+                                            text = "NFT",
+                                            style = MaterialTheme.typography.displayMedium,
+                                            color = PoliceBlue,
+                                        )
+                                    }
+
+                                }
+
+                            }
+                        }
 
                         }
                     }
@@ -567,7 +985,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.End
                             ) {
-                                Text(text = "شبکه",
+                                Text(text = stringResource(id = R.string.network),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = GrayD
                                 )
@@ -618,7 +1036,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.End
                             ) {
-                                Text(text = "توکن",
+                                Text(text = stringResource(id = R.string.token),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = GrayD
                                 )
@@ -669,7 +1087,6 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 contentDescription = "",
                                 tint = EerieBlack,
                                 modifier = Modifier.size(16.dp)
-
                             )
 
                             Text(text = "ریحانه کشاورز حداد",
@@ -694,7 +1111,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.End
                         ){
-                            Text(text = "توکن از حساب",
+                            Text(text = stringResource(id = R.string.token_from_account),
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = PoliceBlue
                             )
@@ -733,7 +1150,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                             Modifier.width(292.dp),
                             contentAlignment = Alignment.CenterEnd
                         ) {
-                            Text(text = ": مقدار توکن",
+                            Text(text = stringResource(id = R.string.token_amount),
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = PoliceBlue)
                         }
@@ -778,7 +1195,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(4.dp)
                         ) {
-                            Text(text = "تومان",
+                            Text(text = stringResource(id = R.string.toman),
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = NationsBlue)
 
@@ -794,7 +1211,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 Modifier.width(292.dp),
                                 contentAlignment = Alignment.CenterEnd
                             ) {
-                                Text(text = ": آدرس ولت گیرنده",
+                                Text(text = stringResource(id = R.string.wallet_address),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = PoliceBlue)
                             }
@@ -837,7 +1254,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 Modifier.width(292.dp),
                                 contentAlignment = Alignment.CenterEnd
                             ) {
-                                Text(text = ": شماره کارت یا شبا",
+                                Text(text = stringResource(id = R.string.card_number_or_iban),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = PoliceBlue)
                             }
@@ -900,7 +1317,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 )
                             )
 
-                            Text(text = "از باتری کم شود",
+                            Text(text = stringResource(id = R.string.deduct_from_battery),
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = Gunmetal,
                                 modifier = Modifier
@@ -916,7 +1333,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center
                             ) {
-                                Text(text = "انرژی",
+                                Text(text = stringResource(id = R.string.energy),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = Succes
                                 )
@@ -942,7 +1359,7 @@ fun BankScreen(modifier: Modifier = Modifier){
                                 )
                             )
 
-                            Text(text = "از کارت کم شود",
+                            Text(text = stringResource(id = R.string.deduct_from_card),
                                 style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                 color = Gunmetal,
                                 modifier = Modifier
@@ -960,7 +1377,11 @@ fun BankScreen(modifier: Modifier = Modifier){
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 10.sp),
                                     color = PoliceBlue
                                 )
-                                Text(text = " avsin: کارمزد تراکنش",
+                                Text(text = " avsin",
+                                    style = MaterialTheme.typography.bodyLarge.copy(fontSize = 10.sp),
+                                    color = PoliceBlue
+                                )
+                                Text(text = stringResource(id = R.string.transaction_fee),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 10.sp),
                                     color = PoliceBlue
                                 )
@@ -982,11 +1403,11 @@ fun BankScreen(modifier: Modifier = Modifier){
                             )
                         ) {
                             Text(
-                                text = if (state == 0) { stringResource(id = R.string.token_transfer_button)
+                                text = if (state == 0) { stringResource(id = R.string.token_transfer)
                                 } else if (state == 1) {
-                                    stringResource(id = R.string.token_buy_button)
+                                    stringResource(id = R.string.token_buy)
                                 } else {
-                                    stringResource(id = R.string.token_sell_button)
+                                    stringResource(id = R.string.token_sell)
                                 },
                                 fontFamily = FontFamily(Font(R.font.ir_medium)),
                                 fontSize = 14.sp)
@@ -1010,8 +1431,8 @@ fun BankScreen(modifier: Modifier = Modifier){
     device = "spec:width=412dp,height=917dp,dpi=480"
 )
 @Composable
-fun BankPreview() {
+fun ExchangePreview() {
     SinarTheme {
-        BankScreen()
+        ExchangeScreen()
     }
 }

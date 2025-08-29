@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -71,6 +72,7 @@ fun OtpScreen(modifier: Modifier = Modifier) {
     var error by remember { mutableStateOf(false) }
     var time by remember { mutableStateOf(30) }
     var enableButton by remember { mutableStateOf(false) }
+    var isEn by remember { mutableStateOf(true) }
 
     if (enableButton == false){
         LaunchedEffect(Unit) {
@@ -114,43 +116,75 @@ fun OtpScreen(modifier: Modifier = Modifier) {
                     .padding(top = 24.dp)
             )
             Text(
-                text = "احراز هویت",
+                text = stringResource(id = R.string.authentication),
                 style = MaterialTheme.typography.displayLarge.copy(fontSize = 18.sp),
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(top = 8.dp),
                 color = Gunmetal
             )
-            Column {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
 
-            ) {
-                Text(text = "رقمی ارسال شده به شماره", style = MaterialTheme.typography.labelSmall,color = GrayF)
-                Text(text = " 5 ", style = MaterialTheme.typography.labelSmall,color = NationsBlue)
-                Text(text = "کد ", style = MaterialTheme.typography.labelSmall,color = GrayF)
-            }
-                Text(
-                    text = phoneNumber,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = NationsBlue,
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = "را وارد کنید",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 8.dp),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = GrayF,
-                    textAlign = TextAlign.Center
-                )
+            Column {
+                if (isEn){
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+
+                    ) {
+                            Text(text = " 5-digit ", style = MaterialTheme.typography.displayMedium,color = NationsBlue)
+                            Text(text = "Please enter the", style = MaterialTheme.typography.displayMedium,color = GrayF)
+                    }
+                    Text(
+                        text = "code sent to the number",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp),
+                        style = MaterialTheme.typography.displayMedium,
+                        color = GrayF,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = phoneNumber,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp),
+                        style = MaterialTheme.typography.displayMedium,
+                        color = NationsBlue,
+                        textAlign = TextAlign.Center
+                    )
+                }else{
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+
+                    ) {
+                            Text(text = "رقمی ارسال شده به شماره", style = MaterialTheme.typography.labelSmall,color = GrayF)
+                            Text(text = " 5 ", style = MaterialTheme.typography.labelSmall,color = NationsBlue)
+                            Text(text = "کد ", style = MaterialTheme.typography.labelSmall,color = GrayF)
+                    }
+                    Text(
+                        text = phoneNumber,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = NationsBlue,
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "را وارد کنید",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = GrayF,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
 
 
@@ -183,13 +217,15 @@ fun OtpScreen(modifier: Modifier = Modifier) {
                     visible = if (error) true else false,
                 ){
                     Row(
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .fillMaxWidth()
                             .padding(top = 8.dp),
                         horizontalArrangement = Arrangement.End
                     ) {
                         Text(
-                            text = "!کد وارد شده اشتباه است",
-                            Modifier.fillMaxWidth(0.9f)
+                            text = stringResource(id = R.string.code_input_error),
+                            Modifier
+                                .fillMaxWidth(0.9f)
                                 .padding(end = 4.dp),
                             fontSize = 14.sp,
                             fontFamily = FontFamily(Font( R.font.ir_regular)),
@@ -228,7 +264,9 @@ fun OtpScreen(modifier: Modifier = Modifier) {
                         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl ){
                             Box(modifier = Modifier.fillMaxWidth(1f)){
                                 Text(
-                                    text = " ارسال مجدد کد بعد از:",
+                                    text =  stringResource(
+                                        id = R.string.resend_after
+                                    ),
                                     Modifier.align(Alignment.CenterStart),
                                     style = MaterialTheme.typography.labelLarge.copy(fontSize = 16.sp),
                                     color = Gunmetal,
@@ -263,7 +301,8 @@ fun OtpScreen(modifier: Modifier = Modifier) {
                         disabledContainerColor = GrayA
                     )
                 ) {
-                    Text("ارسال مجدد",
+                    Text(
+                        stringResource(id = R.string.resend),
                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                         fontSize = 14.sp)
                     Spacer(modifier = Modifier.width(8.dp))
@@ -277,7 +316,7 @@ fun OtpScreen(modifier: Modifier = Modifier) {
 
 
         Text(
-            text = "ورژن 1.0.0",
+            text = stringResource(id = R.string.app_version),
             Modifier
                 .padding(bottom = 54.dp, end = 0.dp)
                 .align(Alignment.BottomCenter),

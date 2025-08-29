@@ -3,125 +3,104 @@
 <!--    splash-->
     <string name="app_name">سینار</string>
     <string name="splash_tagline">سینار، پلی به خدمات دانشگاهی هوشمند</string>
+
 <!--    login-->
-    <string name="login_title">ورود به حساب</string>
-    <string name="login_instruction">لطفا اطلاعات زیر را با دقت پر کنید.</string>
-    <string name="tab_academics">دانشگاهیان</string>
-    <string name="tab_other_users">سایر کاربران</string>
-    <string name="field_student_id">شماره دانشجویی / پرسنلی</string>
-    <string name="field_national_id">شماره شناسنامه</string>
-    <string name="field_security_code">کد امنیتی</string>
-    <string name="field_password">رمز عبور</string>
-    <string name="link_forgot_password">فراموشی رمز عبور؟</string>
-    <string name="link_recover_password">بازیابی رمز عبور</string>
+    <string name="login">ورود به حساب</string>
+    <string name="enter_your_information_accurately">لطفا اطلاعات زیر را با دقت پر کنید.</string>
+    <string name="academics">دانشگاهیان</string>
+    <string name="citizens">شهروندان</string>
+    <string name="password">رمز عبور</string>
+    <string name="enter_the_captcha">کد کپچا</string>
+    <string name="forgot_password">فراموشی رمز عبور؟</string>
+    <string name="recover_password">بازیابی رمز عبور</string>
     <string name="button_login">ورود به حساب</string>
-    <string name="app_version">1.0.3</string>
-    <string name="error_student_id">شماره دانشجویی صحیح نیست، لطفا دوباره وارد کنید!</string>
-    <string name="captcha_hint">نمونه کد امنیتی</string>
-    <string name="login_instruction_citizen">لطفا اطلاعات زیر را وارد یا تایید کنید.</string>
-    <string name="field_national_code">کدملی</string>
-    <string name="create_account_title">ساخت حساب جدید</string>
-    <string name="create_account_instruction">اطلاعات خود را با دقت وارد کنید.</string>
-    <string name="tab_citizens">شهروندان</string>
-    <string name="field_full_name">نام و نام خانوادگی</string>
-    <string name="field_phone_number">شماره تلفن</string>
-    <string name="field_captcha">کد کپچا</string>
+    <string name="full_name">نام و نام خانوادگی</string>
     <string name="checkbox_terms0">تمامی </string>
     <string name="checkbox_terms1">قوانین و مقررات</string>
     <string name="checkbox_terms2">را می‌پذیرم</string>
-    <string name="button_create_account">ساخت حساب جدید</string>
-    <string name="link_login">ورود</string>
-    <string name="login_title_citizen">ورود به حساب</string>
-    <string name="tab_students">دانش‌آموزان</string>
-    <string name="link_create_account">ساخت حساب جدید</string>
-    <string name="authentication_title">احراز هویت</string>
-    <string name="authentication_instruction">لطفا کد ۵ رقمی ارسال‌شده به شماره ۰۹۱۹۸۶۹۶۳۸۹ را وارد کنید.</string>
-    <string name="resend_disabled">ارسال مجدد</string>
-    <string name="resend_after_label">ارسال مجدد بعد از :</string>
+    <string name="error_student_id">شماره دانشجویی اشتباه است، دوباره تکرار کنید!</string>
+    <string name="authentication">احراز هویت</string>
     <string name="code_input_error">کد وارد شده، اشتباه است!</string>
-    <string name="resend_button">ارسال مجدد</string>
-    <string name="password_recovery_title">بازیابی رمز عبور</string>
-    <string name="password_recovery_instruction">لطفا اطلاعات زیر را با دقت وارد کنید.</string>
-    <string name="button_receive_code_arrow">← دریافت کد</string>
-    <string name="field_phone_number_display">۰۹۱۹ ۹۸۶ ۹۳۸۹</string>
-    <string name="countdown_timer">۰۰:۳۰</string>
-    <string name="title_password_recovery">بازیابی رمز عبور</string>
-    <string name="subtitle_enter_new_password">لطفا گذرواژه جدید خود را وارد کنید</string>
-    <string name="label_phone_number">۹۸۹۳۸۴۹۸۶۹۸+</string>
-    <string name="label_verification_code">۷۸۹۶</string>
-    <string name="text_resend_code_timer">ارسال مجدد کد بعد از : ۰:۳۰</string>
-    <string name="label_new_password">گذرواژه جدید</string>
-    <string name="label_repeat_password">تکرار گذرواژه</string>
-    <string name="button_change_password">تغییر گذرواژه</string>
+
+
+    <!--    تغییر رمز-->
+    <string name="password_recovery">بازیابی رمز عبور</string>
+    <string name="please_fill_information">لطفا شماره تلفن خود را با دقت پر کنید.</string>
+    <string name="get_code">دریافت کد</string>
+    <string name="phone_number">شماره تلفن</string>
+    <string name="app_version">1.0.3</string>
+    <string name="resend_after">ارسال مجدد کد بعد از: </string>
+    <string name="resend">ارسال مجدد</string>
+    <string name="change_password">تغییر گذرواژه</string>
 
 <!--    wallet-->
-    <string name="title_backup_phrase">عبارت بازیابی</string>
-    <string name="subtitle_backup_phrase">لطفا عبارت بازیابی خود را یادداشت کنید</string>
-    <string name="button_next_step">مرحله بعد</string>
-    <string name="button_save_to_device">ذخیره در دستگاه</string>
+    <string name="write_down_your_recovery">عبارت بازیابی خود را یادداشت کنید</string>
+    <string name="save_your_recovery_phrase_either">عبارت بازیابی خود را ذخیره کنید یا به صورت امن</string>
+    <string name="enter_this_phrase">پشتیبان گیری کنید. در مرحله بعد باید عبارت را دوباره وارد کنید</string>
+    <string name="your_wallet_address">آدرس کیف پول شما : </string>
+    <string name="copy">کپی کردن</string>
+    <string name="save_to_device">ذخیره در دستگاه</string>
+    <string name="next_step">مرحله بعدی</string>
 
 <!--    home-->
+    <string name="national_id">کد ملی</string>
+    <string name="current_blockchain_network">شبکه فعلی بلاکچین</string>
+    <string name="token_balance">موجودی توکن</string>
+    <string name="balance_in_euros">موجودی به تومان</string>
+    <string name="student_staff_id">شماره دانشجویی | پرسنلی</string>
+    <string name="invoice">صورت حساب</string>
+    <string name="transaction">معامله</string>
+    <string name="payment">پرداخت</string>
+    <string name="dormitory_reservation">رزرو خوابگاه</string>
+    <string name="food_reservation_exchange">رزرو و تبادل غذا</string>
+    <string name="exchange">صرافی</string>
+    <string name="events">ایونت ها</string>
+    <string name="tree_network">شبکه درختی</string>
+    <string name="home">خانه</string>
+    <string name="rothbard">الوند</string>
+    <string name="library">کتابخانه</string>
+    <string name="my_miner">ماینر من</string>
+    <string name="asset_management">مدیریت اموال</string>
+    <string name="b_loan">وام B</string>
+    <string name="industrial_investment0">سرمایه گذاری</string>
+    <string name="industrial_investment1">صنعتی</string>
+    <string name="network_registration">ثبت نام در شبکه</string>
+    <string name="futures_trading">معاملات آتی</string>
+    <string name="health_engine">هلث انجین</string>
+    <string name="solar_farms">مزارع خورشیدی</string>
+    <string name="dara">دارا</string>
+    <string name="azarakhsh">آذرخش</string>
 
-    <string name="label_student_name">ریحانه کشاورز حدادها</string>
-    <string name="label_student_number">30781</string>
-    <string name="label_student_id">4311518005</string>
-    <string name="label_university">پرسنلی</string>
-    <string name="label_network_status">شبکه فعلی: آنلاین</string>
-    <string name="icon_account_statement">صورت حساب</string>
-    <string name="icon_transaction">معامله</string>
-    <string name="subicon_exchange">صرافی</string>
-    <string name="icon_payment">پرداخت</string>
-    <string name="button_food_reservation">رزرو و تبادل غذا</string>
-    <string name="nav_home">خانه</string>
-    <string name="nav_food_reservation">رزرو غذا</string>
-    <string name="nav_market">مارکت</string>
-    <string name="label_user_name">سوفیا لینکلن</string>
-    <string name="label_blockchain_address">۰x5A141.....307b1</string>
-    <string name="label_national_id">کد ملی شهروندی: 4311518005</string>
-    <string name="label_network">شبکه بلاکچین فعلی: شبکه اکباتان</string>
-    <string name="label_token_balance">موجودی توکن (سینار): ۵۵.۰۰</string>
-    <string name="label_euro_balance">موجودی یورو: ۲۵۰۰.۰۰۰$ (۱$)</string>
-    <string name="button_statement">صورت حساب</string>
-    <string name="button_trade">معامله</string>
-    <string name="button_pay">پرداخت</string>
-    <string name="section_food_reservation">رزرو و تبادل غذا</string>
-    <string name="nav_rothbard">الوند</string>
-    <string name="nav_library">کتابخانه</string>
-    <string name="nav_my_miner">مای ماینر</string>
+    <!--    دیالوگ خروج از برنامه-->
+    <string name="cancel">انصراف</string>
+    <string name="exit_application">خروج از برنامه</string>
+    <string name="are_you_exit">آیا مطمئن هستی، میخوای خارج بشی ؟</string>
 
 <!--دیالوگ تنظیمات-->
-    <string name="title_profile">پروفایل</string>
-    <string name="menu_profile_settings">تنظیمات پروفایل</string>
-    <string name="menu_arzakasht_settings">تنظیمات ارزاکشت</string>
-    <string name="menu_identity_levels">سطوح احراز هویت</string>
-    <string name="menu_about_us">درباره ما</string>
-    <string name="menu_white_paper">وایت پیپر</string>
-    <string name="menu_issues">ایرادات</string>
-    <string name="menu_app_theme">تم اپلیکیشن</string>
-    <string name="menu_logout">خروج</string>
-    <string name="nav_arzakasht">ارزاکشت</string>
-    <string name="nav_technical_services">خدمات فنی</string>
-    <string name="nav_profile">پروفایل</string>
+    <string name="profile_settings">تنظیمات پروفایل</string>
+    <string name="fingerprint_settings">تنظیمات اثرانگشت</string>
+    <string name="verification_levels">سطوح احراز هویت</string>
+    <string name="about_us">درباره ما</string>
+    <string name="white_paper">وایت پیپر</string>
+    <string name="airdrop">ایردراپ</string>
+    <string name="app_theme">تم اپلیکیشن</string>
+    <string name="logout">خروج</string>
 
 <!--    دیال.گ پروفایل-->
-
-    <string name="title_profile_edit">ویرایش اطلاعات</string>
-    <string name="label_repeat_new_password">تکرار رمز عبور جدید</string>
-    <string name="button_save_changes">ثبت تغییرات</string>
-    <string name="nav_gifts">هدایا</string>
+    <string name="new_password">رمز عبور جدید</string>
+    <string name="confirm_new_password">تکرار رمز عبور جدید</string>
+    <string name="save_changes">ثبت تغییرات</string>
 
 <!--    دیالوگ سومی-->
-
-    <string name="menu_create_account">ساخت حساب جدید</string>
-    <string name="menu_add_network">افزودن شبکه بلاکچین</string>
-    <string name="menu_token_balances">موجودی توکن‌ها</string>
-    <string name="menu_roadmap">نقشه راه</string>
-    <string name="menu_view_private_keys">مشاهده کلیدهای خصوصی</string>
-    <string name="menu_recover_accounts">بازیابی حساب‌های قبلی</string>
-    <string name="menu_add_token">افزودن توکن</string>
+    <string name="create_account">ساخت حساب جدید</string>
+    <string name="add_network">افزودن شبکه بلاکچین</string>
+    <string name="token_balances">موجودی توکن‌ها</string>
+    <string name="roadmap">نقشه راه</string>
+    <string name="view_private_keys">مشاهده کلیدهای خصوصی</string>
+    <string name="recover_accounts">بازیابی حساب‌های قبلی</string>
+    <string name="add_token">افزودن توکن</string>
 
 <!--    اطلاعات حساب-->
-
     <string name="title_account_info">اطلاعات حساب</string>
     <string name="label_wallet_address">آدرس والت شما:</string>
     <string name="label_share_with">اشتراک‌گذاری با</string>
@@ -137,28 +116,49 @@
     <string name="status_rejected">رد شده</string>
     <string name="status_pending">در انتظار تایید</string>
 
-<!--    رزرو غذا-->
+    <!--    رزرو غذا-->
+    <string name="food_sale_reservation">فروش و رزرو غذا</string>
+    <string name="change_reservation_mode">تغییر حالت به رزو غذا</string>
+    <string name="purchase_food">خرید غذا</string>
+    <string name="add_food">افزودن غذا</string>
 
-    <string name="title_food_sale_reservation">فروش و رزرو غذا</string>
-    <string name="label_reservation_mode">حالت رزرو غذا</string>
-    <string name="label_faculty">دانشکده:</string>
-    <string name="label_food_name">نام غذا:</string>
-    <string name="label_quantity">تعداد:</string>
-    <string name="label_price">قیمت:</string>
-    <string name="label_timer">زمان باقی‌مانده:</string>
-    <string name="label_barcode">بارکد:</string>
-    <string name="button_purchase_food">خرید غذا</string>
-    <string name="button_add_food">افزودن غذا</string>
-<!--دبالوگ غذا-->
-    <string name="label_select_food_type">نوع غذای خود را انتخاب کنید</string>
-    <string name="label_suggested_price">قیمت پیشنهادی شما</string>
-    <string name="label_pickup_location">محل تحویل سلف سرویس</string>
-    <string name="label_forgot_code">فراموشی کد</string>
-    <string name="button_gender_ladies">بانوان</string>
-    <string name="button_gender_gentlemen">آقایان</string>
-    <string name="label_food_timer">زمان باقی‌مانده:</string>
-    <string name="label_food_code">کد غذا:</string>
+    <!--دبالوگ غذا-->
+    <string name="select_food_type">نوع غذای خود را انتخاب کنید</string>
+    <string name="suggested_price">قیمت پیشنهادی شما</string>
+    <string name="pickup_location">سلف محل تحویل</string>
+    <string name="forgot_code">کد فراموشی</string>
+    <string name="ladies">خواهران</string>
+    <string name="gentlemen">برادران</string>
 
 <!--    صرافی-->
+    <string name="token_transfer">انتقال توکن</string>
+    <string name="token_buy">خرید توکن</string>
+    <string name="token_sell">فروش توکن</string>
+    <string name="battery_charging">شارژ باتری</string>
+    <string name="token">توکن</string>
+    <string name="network">شبکه</string>
+    <string name="toman">تومان</string>
+    <string name="wallet_address">آدرس ولت گیرنده : </string>
+    <string name="deduct_from_battery">از باتری کم شود</string>
+    <string name="deduct_from_card">از شارژ کم شود</string>
+    <string name="energy">انرژی</string>
+    <string name="transaction_fee">کارمزد تراکنش : </string>
+    <string name="token_amount">مقدار توکن : </string>
+    <string name="card_number_or_iban">شماره کارت یا شبا : </string>
+
+    <!--    شارژ باتری-->
+    <string name="token_from_account">توکن از حساب</string>
+    <string name="token_amount_for_charging">مقدار توکن : </string>
+    <string name="special_offers">پیشنهادات ویژه</string>
+
+    <!--    دیالوگ انتقال با موفقیت-->
+    <string name="transfer_successfully">انتقال با موفقیت انجام شد!</string>
+    <string name="buy_successfully">خرید با موفقیت انجام شد!</string>
+    <string name="sell_successfully">با موفقیت انجام شد!</string>
+    <string name="transaction_deposit">تراکنش در صف واریز قرار گرفت ...</string>
+    <string name="deposit_notification">پیام واریز به حساب بانکی را در صورتحساب خود تا
+دقایقی دیگر مشاهده خواهید کرد</string>
+    <string name="transaction_serial">سریال تراکنش : </string>
+    <string name="view_explorer">مشاهده در اکسپلور</string>
 
 </resources>

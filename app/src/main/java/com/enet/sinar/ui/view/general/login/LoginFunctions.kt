@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -63,8 +64,8 @@ fun RoleSelector(
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text(text = when (role) {
-                    true -> "دانشگاهیان"
-                    false -> {"شهروندان"}
+                    true -> stringResource(id = R.string.academics)
+                    false -> stringResource(id = R.string.citizens)
                 },
                     color = if (isSelected) Primary else GrayC,
                     fontFamily = FontFamily(Font(R.font.ir_medium)),
@@ -124,7 +125,7 @@ fun CaptchaImage(captchaText: String) {
             .fillMaxWidth()
             .pointerInput(Unit) {
                 detectTapGestures {
-                   generateCaptcha(6)
+                    generateCaptcha(6)
                 }
             }
     )

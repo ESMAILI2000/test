@@ -44,7 +44,8 @@ import com.enet.sinar.ui.theme.PoliceBlue
 import com.enet.sinar.ui.theme.SinarTheme
 import com.enet.sinar.ui.theme.Water
 import com.enet.sinar.ui.theme.White
-import com.enet.sinar.ui.view.EllipsizedMiddleText
+import com.enet.sinar.ui.view.custom_view.EllipsizedMiddleText
+
 
 @Composable
 fun InformationScreen(modifier: Modifier = Modifier){
@@ -125,9 +126,7 @@ fun InformationScreen(modifier: Modifier = Modifier){
                         endLength = 5,
                         maxLines = 1,
                         color = Gunmetal,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp,
-                             fontFamily = FontFamily(Font(R.font.poppins_medium))
-                            ),
+                        style = MaterialTheme.typography.displayMedium,
                         modifier = Modifier
                             .align(Alignment.Center)
                     )

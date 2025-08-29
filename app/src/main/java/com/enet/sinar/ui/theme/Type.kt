@@ -75,6 +75,11 @@ val Typography = Typography(
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Black,
                 fontSize = 18.sp,
+        ),
+        displayMedium = TextStyle(
+                fontFamily = FontFamily(Font(R.font.poppins_medium)),
+                fontWeight = FontWeight.Medium,
+                fontSize = 12.sp
         )
         /* Other default text styles to override
     titleLarge = TextStyle(

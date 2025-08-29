@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
 }
 
 android {
@@ -8,7 +10,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.enet.sinar"
+        applicationId = "com.sinar.university"
         minSdk = 26
         //noinspection ExpiredTargetSdkVersion
         targetSdk = 29
@@ -80,4 +82,6 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
+    implementation ("com.google.dagger:hilt-android:2.44.2")
+    kapt ("com.google.dagger:hilt-compiler:2.44.2")
 }

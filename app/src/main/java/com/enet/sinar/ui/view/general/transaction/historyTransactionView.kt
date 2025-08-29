@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,8 +50,8 @@ import com.enet.sinar.ui.theme.SinarTheme
 import com.enet.sinar.ui.theme.Succes
 import com.enet.sinar.ui.theme.Water
 import com.enet.sinar.ui.theme.White
-import com.enet.sinar.ui.view.DashedContainer
-import com.enet.sinar.ui.view.EllipsizedMiddleText
+import com.enet.sinar.ui.view.custom_view.DashedContainer
+import com.enet.sinar.ui.view.custom_view.EllipsizedMiddleText
 
 @Composable
 fun HistoryTransactionScreen(modifier: Modifier = Modifier){
@@ -84,7 +85,7 @@ fun HistoryTransactionScreen(modifier: Modifier = Modifier){
                 .size(24.dp)
         )
         Text(
-            text = "صورت حساب",
+            text = stringResource(id = R.string.invoice),
             style = MaterialTheme.typography.displayLarge.copy(fontSize = 16.sp),
             modifier = Modifier
                 .padding(horizontal = 24.dp, vertical = 16.dp)

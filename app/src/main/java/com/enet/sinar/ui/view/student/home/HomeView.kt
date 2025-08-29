@@ -36,6 +36,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Menu
@@ -74,6 +75,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -93,6 +95,7 @@ import com.enet.sinar.ui.theme.EerieBlack
 import com.enet.sinar.ui.theme.Err
 import com.enet.sinar.ui.theme.GargoyleGas
 import com.enet.sinar.ui.theme.Gray04
+import com.enet.sinar.ui.theme.GrayC
 import com.enet.sinar.ui.theme.GrayE
 import com.enet.sinar.ui.theme.GrayF
 import com.enet.sinar.ui.theme.Gunmetal
@@ -102,10 +105,11 @@ import com.enet.sinar.ui.theme.SinarTheme
 import com.enet.sinar.ui.theme.Succes
 import com.enet.sinar.ui.theme.Water
 import com.enet.sinar.ui.theme.White
-import com.enet.sinar.ui.view.DashedContainer
-import com.enet.sinar.ui.view.EllipsizedMiddleText
 import com.enet.sinar.ui.view.MenuItem
 import com.enet.sinar.ui.view.TextFeildItem
+import com.enet.sinar.ui.view.custom_view.DashedContainer
+import com.enet.sinar.ui.view.custom_view.EllipsizedMiddleText
+import com.enet.sinar.ui.view.custom_view.HexagonShape
 
 
 @SuppressLint("UnrememberedMutableState")
@@ -113,15 +117,14 @@ import com.enet.sinar.ui.view.TextFeildItem
 @Composable
 fun StudentHomeScreen(
     onLogout: () -> Unit={},
-    onDarkThemeClicked: () -> Unit = {},
     modifier: Modifier = Modifier) {
-
 
     var isVisibleHeader by remember { mutableStateOf(false) }
     var isVisibleFlotion by remember { mutableStateOf(false) }
     var isDialogSetting by remember { mutableStateOf(false) }
     var isDialogMenu by remember { mutableStateOf(false) }
     var isDialogEditProfile by remember { mutableStateOf(false) }
+    var isDialogExit by remember { mutableStateOf(false) }
     var isDarkMode by remember { mutableStateOf(false) }
     var pageCount =  4
     val listState = rememberLazyListState()
@@ -132,30 +135,30 @@ fun StudentHomeScreen(
     }
 
     val itemsSetting = listOf(
-        MenuItem("تنظیمات پروفایل", painterResource(id = R.drawable.vc_user_circle)),
-        MenuItem("تنظیمات اثر انگشت", painterResource(id = R.drawable.vc_fingerprint)),
-        MenuItem("سطوح احراز هویت", painterResource(id = R.drawable.vc_shield_lock)),
-        MenuItem("درباره ما", painterResource(id = R.drawable.vc_users)),
-        MenuItem("وایت پیپر", painterResource(id = R.drawable.vc_notes))
-      )
+        MenuItem(stringResource(id = R.string.profile_settings), painterResource(id = R.drawable.vc_user_circle)),
+        MenuItem(stringResource(id = R.string.fingerprint_settings), painterResource(id = R.drawable.vc_fingerprint)),
+        MenuItem(stringResource(id = R.string.verification_levels), painterResource(id = R.drawable.vc_shield_lock)),
+        MenuItem(stringResource(id = R.string.about_us), painterResource(id = R.drawable.vc_users)),
+        MenuItem(stringResource(id = R.string.white_paper), painterResource(id = R.drawable.vc_notes))
+    )
 
     val itemsMenu = listOf(
-        MenuItem("ساخت اکانت جدید", painterResource(id = R.drawable.vc_user_plus)),
-        MenuItem("افزودن شبکه بلاکچین", painterResource(id = R.drawable.vc_topology_full)),
-        MenuItem("موجودی توکن ها", painterResource(id = R.drawable.vc_wallet)),
-        MenuItem("نقشه راه", painterResource(id = R.drawable.vc_route)),
-        MenuItem("مشاهده کلید های خصوصی", painterResource(id = R.drawable.vc_eye)),
-        MenuItem("بازیابی حساب های قبلی", painterResource(id = R.drawable.vc_rotate_clockwise)),
-        MenuItem("افزودن توکن", painterResource(id = R.drawable.vc_plus))
+        MenuItem(stringResource(id = R.string.create_account), painterResource(id = R.drawable.vc_user_plus)),
+        MenuItem(stringResource(id = R.string.add_network), painterResource(id = R.drawable.vc_topology_full)),
+        MenuItem(stringResource(id = R.string.token_balances), painterResource(id = R.drawable.vc_wallet)),
+        MenuItem(stringResource(id = R.string.roadmap), painterResource(id = R.drawable.vc_route)),
+        MenuItem(stringResource(id = R.string.view_private_keys), painterResource(id = R.drawable.vc_eye)),
+        MenuItem(stringResource(id = R.string.recover_accounts), painterResource(id = R.drawable.vc_rotate_clockwise)),
+        MenuItem(stringResource(id = R.string.add_token), painterResource(id = R.drawable.vc_plus))
     )
 
     val itemsEditProfile = listOf(
-        TextFeildItem("نام", painterResource(id = R.drawable.vc_user),mutableStateOf("")),
-        TextFeildItem("شماره دانشجویی", painterResource(id = R.drawable.vc_school),mutableStateOf(""), isNumeric = true),
-        TextFeildItem("دانشگاه", painterResource(id = R.drawable.vc_user_circle),mutableStateOf("")),
-        TextFeildItem("شماره تماس", painterResource(id = R.drawable.vc_phone_call),mutableStateOf(""), isNumeric = true),
-        TextFeildItem("رمز عبور جدید", painterResource(id = R.drawable.vc_lock),mutableStateOf(""), isPassword = true),
-        TextFeildItem("تکرار رمز عبور جدید", painterResource(id = R.drawable.vc_lock_open),mutableStateOf(""), isPassword = false),
+        TextFeildItem("", painterResource(id = R.drawable.vc_user),mutableStateOf("")),
+        TextFeildItem("", painterResource(id = R.drawable.vc_school),mutableStateOf(""), isNumeric = true),
+        TextFeildItem("", painterResource(id = R.drawable.vc_user_circle),mutableStateOf("")),
+        TextFeildItem("", painterResource(id = R.drawable.vc_phone_call),mutableStateOf(""), isNumeric = true),
+        TextFeildItem(stringResource(id = R.string.new_password), painterResource(id = R.drawable.vc_lock),mutableStateOf(""), isPassword = true),
+        TextFeildItem(stringResource(id = R.string.confirm_new_password), painterResource(id = R.drawable.vc_lock_open),mutableStateOf(""), isPassword = false),
     )
 
     Scaffold(
@@ -163,7 +166,7 @@ fun StudentHomeScreen(
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl){
                 TopAppBar(
                     title = { Text(
-                        text ="سینار",
+                        text =stringResource(id = R.string.app_name),
                         style = MaterialTheme.typography.titleLarge,
                         color = Gunmetal
                     ) },
@@ -352,10 +355,10 @@ fun StudentHomeScreen(
         bottomBar = {
            var selectedItem by remember { mutableStateOf(3) }
             val items = listOf(
-                MenuItem("ماينز من", painterResource(id = R.drawable.vc_hammer_crash)),
-                MenuItem("الوند", painterResource(id = R.drawable.vc_vector)),
-                MenuItem("كتابخانه", painterResource(id = R.drawable.vc_book_alt)),
-                MenuItem("خانه", painterResource(id = R.drawable.vc_group))
+                MenuItem(stringResource(id = R.string.my_miner), painterResource(id = R.drawable.vc_hammer_crash)),
+                MenuItem(stringResource(id = R.string.rothbard), painterResource(id = R.drawable.vc_vector)),
+                MenuItem(stringResource(id = R.string.library), painterResource(id = R.drawable.vc_book_alt)),
+                MenuItem(stringResource(id = R.string.home), painterResource(id = R.drawable.vc_group))
             )
 
             Box(
@@ -455,54 +458,6 @@ fun StudentHomeScreen(
                         }
 
                     }
-//                    BottomAppBar(
-////                        contentColor = Color.Transparent,
-//                        containerColor = Color.Transparent,
-//                        modifier = Modifier.align(Alignment.TopCenter)
-//                            .padding(horizontal = 16.dp)
-//                    ) {
-//                        items.forEachIndexed { index, item ->
-//                            NavigationBarItem(
-//                                modifier = Modifier
-//                                    .background(
-//                                        if (selectedItem == index) White else Color.Transparent,
-//                                        RoundedCornerShape(topEnd = 0.dp, topStart = 0.dp, bottomEnd = 58.dp, bottomStart = 58.dp)
-//                                    )
-//                                    .size(77.dp,77.dp),
-//                                selected = selectedItem == index,
-//                                onClick = { selectedItem = index },
-//                                icon = {
-//                                    Box(
-//                                        contentAlignment = Alignment.Center,
-//                                        modifier = Modifier
-//                                            .background(
-//                                                if (selectedItem == index)
-//                                                    Color(0xFFFFD84D) // رنگ زرد برای خانه
-//                                                else
-//                                                    Color.Transparent,
-//                                                shape = CircleShape
-//                                            )
-//                                            .size(58.dp)
-//                                            .padding(if (selectedItem == index) 8.dp else 0.dp)
-//                                    ) {
-//
-//                                        Icon(
-//                                            imageVector = item.icon,
-//                                            contentDescription = item.label,
-//                                            tint = if (selectedItem == index) Color.Black else Water
-//                                        )
-//                                    }
-//                                },
-//                                label = if (selectedItem != index) {
-//                                    { Text(item.label, fontSize = 12.sp) }
-//                                } else null,
-//                                colors = NavigationBarItemDefaults. colors(
-//                                    indicatorColor = Color.Transparent
-//                                )
-//                            )
-//                        }
-//
-//                    }
                 }
             }
         },
@@ -516,6 +471,112 @@ fun StudentHomeScreen(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
+
+                // دیالوگ خروج از برنامه
+                if (isDialogExit){
+                    Dialog(
+                        onDismissRequest = {
+                            isDialogExit = false
+                        }
+                    ) {
+                        Column {
+                            // برای اینکه دیالوگ پایین صفحه قرار بگیرد
+                            Spacer(modifier = Modifier.height(250.dp))
+
+                            Column( // محتوای اصلی دیالوگ
+                                modifier = Modifier
+                                    .width(364.dp)
+                                    .background(White, RoundedCornerShape(32.dp)),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = "" ,
+                                    tint = EerieBlack,
+                                    modifier = Modifier
+                                        .align(Alignment.Start)
+                                        .padding(start = 16.dp, top = 16.dp)
+                                        .size(24.dp)
+                                        .pointerInput(Unit){
+                                            detectTapGestures {
+                                                isDialogExit = false
+                                            }
+                                        }
+                                )
+                                Column(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Image(
+                                        painter = painterResource(id = R.drawable.ic_logout),
+                                        contentDescription = "",
+                                        Modifier.size(68.dp)
+                                    )
+
+                                    Spacer(modifier = Modifier.height(16.dp))
+
+                                    Text(
+                                        text = stringResource(id = R.string.exit_application),
+                                        style = MaterialTheme.typography.bodyLarge.copy(fontSize = 18.sp),
+                                        color = Gunmetal
+                                    )
+
+                                    Spacer(modifier = Modifier.height(8.dp))
+
+                                    Text(
+                                        text = stringResource(id = R.string.are_you_exit),
+                                        style = MaterialTheme.typography.bodyLarge,
+                                        color = GrayF
+                                    )
+
+                                    Spacer(modifier = Modifier.height(24.dp))
+
+                                    Row(
+                                        Modifier.width(332.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.SpaceBetween
+                                    ) {
+                                        OutlinedButton(
+                                            onClick = {
+                                                isDialogExit = false
+                                            },
+                                            modifier = Modifier
+                                                .size(158.dp, 53.dp),
+                                            shape = RoundedCornerShape(12.dp),
+                                            border = BorderStroke(1.dp, Err)
+                                        ) {
+                                            Text(
+                                                text = stringResource(id = R.string.cancel),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                                color = Err
+                                            )
+                                        }
+
+                                        FilledTonalButton(
+                                            onClick = { /*TODO*/ },
+                                            modifier = Modifier
+                                                .size(158.dp, 53.dp),
+                                            shape = RoundedCornerShape(12.dp),
+                                            colors =  ButtonDefaults. outlinedButtonColors(
+                                                containerColor = Err,
+                                                contentColor = White
+                                            )
+                                        ) {
+                                            Text(
+                                                text = stringResource(id = R.string.exit_application),
+                                                style = MaterialTheme.typography.bodyLarge,
+                                            )
+                                        }
+
+                                    }
+
+                                    Spacer(modifier = Modifier.size(16.dp))
+                                }
+                            }
+                        }
+
+                    }
+                }
 
                 if (isDialogMenu){
                     Column(
@@ -770,7 +831,7 @@ fun StudentHomeScreen(
                                                         modifier = Modifier
                                                             .size(24.dp)
                                                     )
-                                                    Text(text = "ایردراپ",
+                                                    Text(text = stringResource(id = R.string.airdrop),
                                                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                                                         color = EerieBlack)
                                                 }
@@ -800,7 +861,7 @@ fun StudentHomeScreen(
                                                         modifier = Modifier
                                                             .size(24.dp)
                                                     )
-                                                    Text(text = "تم اپلیکیشن",
+                                                    Text(text = stringResource(id = R.string.app_theme),
                                                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                                                         color = EerieBlack)
                                                 }
@@ -857,7 +918,7 @@ fun StudentHomeScreen(
                                                         modifier = Modifier
                                                             .size(24.dp)
                                                     )
-                                                    Text(text = "خروج",
+                                                    Text(text = stringResource(id = R.string.logout),
                                                         style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                                                         color = EerieBlack)
                                                 }
@@ -888,7 +949,6 @@ fun StudentHomeScreen(
                             }
                         }
                     }
-
                 }
 
                 if (isDialogEditProfile){
@@ -990,7 +1050,7 @@ fun StudentHomeScreen(
                                                 contentColor = Color.White,
                                             )
                                         ) {
-                                            Text("ثبت تغییرات",
+                                            Text(stringResource(id = R.string.save_changes),
                                                 fontFamily = FontFamily(Font(R.font.ir_medium)),
                                                 fontSize = 14.sp)
                                             Spacer(modifier = Modifier.width(8.dp))
@@ -1046,7 +1106,8 @@ fun StudentHomeScreen(
                                 cornerRadius = 24.dp,
                                 borderColor = Color.Blue
                             ) {
-                                Column(modifier = Modifier.fillMaxWidth()
+                                Column(modifier = Modifier
+                                    .fillMaxWidth()
                                     .padding(16.dp),
                                     horizontalAlignment = Alignment.CenterHorizontally) {
                                     Box(modifier = Modifier.fillMaxWidth()){
@@ -1099,7 +1160,8 @@ fun StudentHomeScreen(
                                             tint = Gunmetal,
                                             modifier =  Modifier.size(20.dp))
 
-                                        EllipsizedMiddleText(text = "0x5A141B7eba38A151EDfcd816D912E6ae5C0307b1",
+                                        EllipsizedMiddleText(
+                                            text = "0x5A141B7eba38A151EDfcd816D912E6ae5C0307b1",
                                             startLength = 10,
                                             endLength = 5,
                                             maxLines = 1,
@@ -1134,7 +1196,7 @@ fun StudentHomeScreen(
                                                 horizontalArrangement = Arrangement.End,
                                                 verticalAlignment = Alignment.CenterVertically
                                             ) {
-                                                Text(text = "شماره دانشجویی | پرسنلی",
+                                                Text(text = stringResource(id = R.string.student_staff_id),
                                                     maxLines = 1,
                                                     color = Gunmetal,
                                                     style = MaterialTheme.typography.displayLarge.copy(fontSize = 12.sp),
@@ -1182,7 +1244,7 @@ fun StudentHomeScreen(
                                                 horizontalArrangement = Arrangement.End,
                                                 verticalAlignment = Alignment.CenterVertically
                                             ) {
-                                                Text(text = "شبکه فعلی بلاکچین",
+                                                Text(text = stringResource(id = R.string.current_blockchain_network),
                                                     maxLines = 1,
                                                     color = Gunmetal,
                                                     style = MaterialTheme.typography.displayLarge.copy(fontSize = 12.sp),
@@ -1242,7 +1304,7 @@ fun StudentHomeScreen(
                                                             tint = Succes,
                                                             modifier =  Modifier.size(14.dp))
 
-                                                        Text(text = "(سینار)",
+                                                        Text(text = "(${stringResource(id = R.string.app_name)})",
                                                             maxLines = 1,
                                                             color = Color(0xFF708AA7),
                                                             style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
@@ -1250,7 +1312,7 @@ fun StudentHomeScreen(
                                                             modifier = Modifier
                                                                 .padding(horizontal = 4.dp))
 
-                                                        Text(text = "موجودی توکن",
+                                                        Text(text = stringResource(id = R.string.token_balance),
                                                             maxLines = 1,
                                                             color = Gunmetal,
                                                             style = MaterialTheme.typography.displayLarge.copy(fontSize = 12.sp),
@@ -1304,7 +1366,7 @@ fun StudentHomeScreen(
                                                         horizontalArrangement = Arrangement.End,
                                                         verticalAlignment = Alignment.CenterVertically
                                                     ) {
-                                                        Text(text = "موجودی به تومان",
+                                                        Text(text = stringResource(id = R.string.balance_in_euros),
                                                             maxLines = 1,
                                                             color = Gunmetal,
                                                             style = MaterialTheme.typography.displayLarge.copy(fontSize = 12.sp),
@@ -1419,7 +1481,7 @@ fun StudentHomeScreen(
                                     tint = White)
                             }
                             Text(
-                                text = "صورت حساب",
+                                text = stringResource(id = R.string.invoice),
                                 style = MaterialTheme.typography.bodyLarge,
                                 modifier = Modifier.width(75.dp),
                                 textAlign = TextAlign.Center,
@@ -1452,7 +1514,7 @@ fun StudentHomeScreen(
                                     tint = White)
                             }
                             Text(
-                                text = "معامله",
+                                text = stringResource(id = R.string.transaction),
                                 style = MaterialTheme.typography.bodyLarge,
                                 modifier = Modifier.width(74.dp),
                                 textAlign = TextAlign.Center,
@@ -1485,7 +1547,7 @@ fun StudentHomeScreen(
                                     tint = White)
                             }
                             Text(
-                                text = "پرداخت",
+                                text = stringResource(id = R.string.payment),
                                 style = MaterialTheme.typography.bodyLarge,
                                 modifier = Modifier.width(75.dp),
                                 textAlign = TextAlign.Center,
@@ -1521,7 +1583,7 @@ fun StudentHomeScreen(
                                     contentDescription = "",
                                     modifier = Modifier.size(32.dp))
                                 Text(
-                                    text = "صرافی",
+                                    text = stringResource(id = R.string.exchange),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = Gunmetal
                                 )
@@ -1546,7 +1608,7 @@ fun StudentHomeScreen(
                                     modifier = Modifier.size(32.dp)
                                 )
                                 Text(
-                                    text = "رزرو و تبادل غذا",
+                                    text = stringResource(id = R.string.food_reservation_exchange),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = Gunmetal
                                 )
@@ -1567,7 +1629,7 @@ fun StudentHomeScreen(
                                     modifier = Modifier.size(32.dp)
                                 )
                                 Text(
-                                    text = "رزرو خوابگاه",
+                                    text = stringResource(id = R.string.dormitory_reservation),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = Gunmetal
                                 )
@@ -1593,7 +1655,7 @@ fun StudentHomeScreen(
                                     modifier = Modifier.size(32.dp)
                                 )
                                 Text(
-                                    text = "ایونت ها",
+                                    text = stringResource(id = R.string.events),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = Gunmetal
                                 )
@@ -1614,7 +1676,7 @@ fun StudentHomeScreen(
                                     modifier = Modifier.size(32.dp)
                                 )
                                 Text(
-                                    text = "شبکه درختی",
+                                    text = stringResource(id = R.string.tree_network),
                                     style = MaterialTheme.typography.bodyLarge.copy(fontSize = 12.sp),
                                     color = Gunmetal
                                 )
@@ -1636,7 +1698,7 @@ fun StudentHomeScreen(
     device = "spec:width=412dp,height=917dp,dpi=480"
 )
 @Composable
-fun HomePreview() {
+fun StudentHomePreview() {
     SinarTheme {
         StudentHomeScreen()
     }

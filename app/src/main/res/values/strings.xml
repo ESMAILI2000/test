@@ -2,115 +2,101 @@
         <string name="app_name">Sinar</string>
         <string name="splash_tagline">Sinar, a bridge to intelligent university services</string>
 
-    <string name="login_title">Login to Account</string>
-    <string name="login_instruction">Please enter the information below.</string>
-    <string name="tab_academics">Academics</string>
-    <string name="tab_other_users">Other users</string>
-    <string name="field_student_id">Student/Personnel Number</string>
-    <string name="field_national_id">ID Number</string>
-    <string name="field_security_code">Security Code</string>
-    <string name="field_password">Password</string>
-    <string name="link_forgot_password">Forgot Password?</string>
-    <string name="link_recover_password">Recover Password</string>
-    <string name="button_login">Login to Account</string>
-    <string name="app_version">1.0.3</string>
-    <string name="error_student_id">Student ID is incorrect, please try again!</string>
-    <string name="captcha_hint">Sample security code</string>
-    <string name="login_instruction_citizen">Please enter or confirm the information below.</string>
-    <string name="field_national_code">National Code</string>
-    <string name="create_account_title">Create New Account</string>
-    <string name="create_account_instruction">Enter your information accurately.</string>
-    <string name="tab_citizens">Citizens</string>
-    <string name="field_full_name">Full Name</string>
-    <string name="field_phone_number">Phone Number</string>
-    <string name="field_captcha">Enter the captcha code</string>
+<!--    لاگین-->
+    <string name="login">Login</string>
+    <string name="enter_your_information_accurately">Enter your information accurately</string>
+    <string name="academics">Academics</string>
+    <string name="citizens">Citizens</string>
+    <string name="password">Password</string>
+    <string name="enter_the_captcha">captcha code</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="recover_password">Reset password</string>
+    <string name="button_login">Log in to Account</string>
+    <string name="full_name">Full Name</string>
     <string name="checkbox_terms0">I accept</string>
     <string name="checkbox_terms1">all terms and conditions</string>
     <string name="checkbox_terms2"> </string>
-    <string name="button_create_account">Create New Account</string>
-    <string name="link_login">Login</string>
-    <string name="login_title_citizen">Login to Account</string>
-    <string name="tab_students">Students</string>
-    <string name="link_create_account">Create a new account</string>
-    <string name="authentication_title">Authentication</string>
-    <string name="authentication_instruction">Please enter the 5-digit code sent to the number 09198696389.</string>
-    <string name="resend_disabled">Resend</string>
-    <string name="resend_after_label">Resend after:</string>
-    <string name="code_input_error">The entered code is incorrect!</string>
-    <string name="resend_button">Resend</string>
-    <string name="password_recovery_title">Password Recovery</string>
-    <string name="password_recovery_instruction">Please fill in the information below carefully.</string>
-    <string name="button_receive_code_arrow">← Get Code</string>
-    <string name="field_phone_number_display">0919 986 9389</string>
-    <string name="countdown_timer">00:30</string>
-    <string name="title_password_recovery">Password Recovery</string>
-    <string name="subtitle_enter_new_password">Please enter your new password</string>
-    <string name="label_phone_number">+98938498698</string>
-    <string name="label_verification_code">7896</string>
-    <string name="text_resend_code_timer">Resend code after: 0:30</string>
-    <string name="label_new_password">New Password</string>
-    <string name="label_repeat_password">Repeat Password</string>
-    <string name="button_change_password">Change Password</string>
+    <string name="error_student_id">Student ID is incorrect, please try again!</string>
+    <string name="authentication">Authentication</string>
+    <string name="code_input_error">The code entered is incorrect!</string>
 
 
-    <string name="title_backup_phrase">Backup Phrase</string>
-    <string name="subtitle_backup_phrase">Please write down your recovery phrase</string>
-    <string name="button_next_step">Next Step</string>
-    <string name="button_save_to_device">Save to Device</string>
-
-    <string name="label_student_name">Reyhaneh Keshavarz Hadadha</string>
-    <string name="label_student_number">30781</string>
-    <string name="label_student_id">4311518005</string>
-    <string name="label_university">Personnel</string>
-    <string name="label_network_status">Current network: Online</string>
-    <string name="icon_account_statement">Account Statement</string>
-    <string name="icon_transaction">Transaction</string>
-    <string name="subicon_exchange">Exchange</string>
-    <string name="icon_payment">Payment</string>
-    <string name="button_food_reservation">Food Reservation and Exchange</string>
-    <string name="nav_home">Home</string>
-    <string name="nav_food_reservation">Food Reservation</string>
-    <string name="nav_market">Market</string>
-    <string name="label_user_name">Sophia Lincoln</string>
-    <string name="label_blockchain_address">0x5A141.....307b1</string>
-    <string name="label_national_id">Citizen National ID Code: 4311518005</string>
-    <string name="label_network">Current Blockchain Network: Ekbatan Network</string>
-    <string name="label_token_balance">Token Balance (Sinar): 55.00</string>
-    <string name="label_euro_balance">Balance in Euros: 2,500.000$ (1$)</string>
-    <string name="button_statement">Statement</string>
-    <string name="button_trade">Trade</string>
-    <string name="button_pay">Pay</string>
-    <string name="section_food_reservation">Food Reservation and Exchange</string>
-    <string name="nav_rothbard">Rothbard</string>
-    <string name="nav_library">Library</string>
-    <string name="nav_my_miner">My Miner</string>
-
-    <string name="title_profile">Profile</string>
-    <string name="menu_profile_settings">Profile Settings</string>
-    <string name="menu_arzakasht_settings">Arzakasht Settings</string>
-    <string name="menu_identity_levels">Identity Verification Levels</string>
-    <string name="menu_about_us">About Us</string>
-    <string name="menu_white_paper">White Paper</string>
-    <string name="menu_issues">Issues</string>
-    <string name="menu_app_theme">Application Theme</string>
-    <string name="menu_logout">Logout</string>
-    <string name="nav_arzakasht">Arzakasht</string>
-    <string name="nav_technical_services">Technical Services</string>
-    <string name="nav_profile">Profile</string>
-
-    <string name="title_profile_edit">Edit Information</string>
-    <string name="label_repeat_new_password">Repeat New Password</string>
-    <string name="button_save_changes">Save Changes</string>
-    <string name="nav_gifts">Gifts</string>
+<!--    تغییر رمز-->
+    <string name="password_recovery">Password Recovery</string>
+    <string name="please_fill_information">Please fill in the information below carefully.</string>
+    <string name="get_code">Get Code</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="app_version">1.0.3</string>
+    <string name="resend_after">Resend after: </string>
+    <string name="resend">Resend</string>
+    <string name="change_password">Change Password</string>
 
 
-    <string name="menu_create_account">Create New Account</string>
-    <string name="menu_add_network">Add Blockchain Network</string>
-    <string name="menu_token_balances">Token Balances</string>
-    <string name="menu_roadmap">Roadmap</string>
-    <string name="menu_view_private_keys">View Private Keys</string>
-    <string name="menu_recover_accounts">Recover Previous Accounts</string>
-    <string name="menu_add_token">Add Token</string>
+    <!--    wallet-->
+    <string name="write_down_your_recovery">Write down your recovery phrase</string>
+    <string name="save_your_recovery_phrase_either">Save your recovery phrase—either write it down or back it up securely. You will need to</string>
+    <string name="enter_this_phrase">enter this phrase again in the next step.</string>
+    <string name="your_wallet_address">your Wallet Address :</string>
+    <string name="copy">Copy</string>
+    <string name="save_to_device">Save to Device</string>
+    <string name="next_step">Next Step</string>
+
+
+    <string name="national_id">National ID</string>
+    <string name="current_blockchain_network">Current Blockchain Network</string>
+    <string name="token_balance">Token Balance</string>
+    <string name="balance_in_euros">Balance in Euros</string>
+    <string name="student_staff_id">Student/Staff ID</string>
+    <string name="invoice">Invoice</string>
+    <string name="transaction">Transaction</string>
+    <string name="payment">Payment</string>
+    <string name="dormitory_reservation">Dormitory Reservation</string>
+    <string name="food_reservation_exchange">Food Reservation and Exchange</string>
+    <string name="exchange">Exchange</string>
+    <string name="events">Events</string>
+    <string name="tree_network">Tree Network</string>
+    <string name="home">Home</string>
+    <string name="rothbard">Rothbard</string>
+    <string name="library">Library</string>
+    <string name="my_miner">My Miner</string>
+    <string name="asset_management">Asset Management</string>
+    <string name="b_loan">B Loan</string>
+    <string name="industrial_investment0">Industrial Investment</string>
+    <string name="industrial_investment1"> </string>
+    <string name="network_registration">Network Registration</string>
+    <string name="futures_trading">Futures Trading</string>
+    <string name="health_engine">Health Engine</string>
+    <string name="solar_farms">Solar Farms</string>
+    <string name="dara">Dara</string>
+    <string name="azarakhsh">Azarakhsh</string>
+
+
+<!--    دیالوگ خروج از برنامه-->
+    <string name="cancel">Cancel</string>
+    <string name="exit_application">Exit Application</string>
+    <string name="are_you_exit">Are you sure you want to exit ?</string>
+
+    <string name="profile_settings">Profile Settings</string>
+    <string name="fingerprint_settings">Fingerprint Settings</string>
+    <string name="verification_levels">Verification Levels</string>
+    <string name="about_us">About Us</string>
+    <string name="white_paper">WhitePaper</string>
+    <string name="airdrop">Airdrop</string>
+    <string name="app_theme">App Theme</string>
+    <string name="logout">Logout</string>
+
+    <string name="new_password">New Password</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="save_changes">Save Changes</string>
+
+
+    <string name="create_account">Create New Account</string>
+    <string name="add_network">Add Blockchain Network</string>
+    <string name="token_balances">Token Balances</string>
+    <string name="roadmap">Roadmap</string>
+    <string name="view_private_keys">View Private Keys</string>
+    <string name="recover_accounts">Recover Previous Accounts</string>
+    <string name="add_token">Add Token</string>
 
     <string name="title_account_info">Account Information</string>
     <string name="label_wallet_address">Your wallet address:</string>
@@ -126,24 +112,49 @@
     <string name="status_rejected">Rejected</string>
     <string name="status_pending">Pending Approval</string>
 
-    <string name="title_food_sale_reservation">Food Sale and Reservation</string>
-    <string name="label_reservation_mode">Food Reservation Mode</string>
-    <string name="label_faculty">Faculty:</string>
-    <string name="label_food_name">Food Name:</string>
-    <string name="label_quantity">Quantity:</string>
-    <string name="label_price">Price:</string>
-    <string name="label_timer">Time Remaining:</string>
-    <string name="label_barcode">Barcode:</string>
-    <string name="button_purchase_food">Food Purchase</string>
-    <string name="button_add_food">Add Food</string>
+    <!--    رزرو غذا-->
+    <string name="food_sale_reservation">Food Sale and Reservation</string>
+    <string name="change_reservation_mode">Change Food Reservation Mode</string>
+    <string name="purchase_food">Food Purchase</string>
+    <string name="add_food">Add Food</string>
+    <!--دبالوگ غذا-->
+    <string name="select_food_type">Select Your Food Type</string>
+    <string name="suggested_price">Your Suggested Price</string>
+    <string name="pickup_location">Self-Service Pickup Location</string>
+    <string name="forgot_code">Forgot Code</string>
+    <string name="ladies">Ladies</string>
+    <string name="gentlemen">Gentlemen</string>
 
-    <string name="label_select_food_type">Select Your Food Type</string>
-    <string name="label_suggested_price">Your Suggested Price</string>
-    <string name="label_pickup_location">Self-Service Pickup Location</string>
-    <string name="label_forgot_code">Forgot Code</string>
-    <string name="button_gender_ladies">Ladies</string>
-    <string name="button_gender_gentlemen">Gentlemen</string>
-    <string name="label_food_timer">Time Remaining:</string>
-    <string name="label_food_code">Food Code:</string>
+<!--    صرافی-->
+    <string name="token_transfer">Token Transfer</string>
+    <string name="token_buy">Buy Token</string>
+    <string name="token_sell">Sell Token</string>
+    <string name="token">Token</string>
+    <string name="network">Network</string>
+    <string name="toman">Toman</string>
+    <string name="wallet_address">Wallet Address : </string>
+    <string name="deduct_from_battery">Deduct from Battery</string>
+    <string name="deduct_from_card">Deduct from Card</string>
+    <string name="energy">Energy</string>
+    <string name="transaction_fee">Transaction Fee : </string>
+    <string name="battery_charging">Battery Charging</string>
+    <string name="token_amount">Token Amount : </string>
+    <string name="card_number_or_iban">Card Number or IBAN : </string>
+
+    <!--    شارژ باتری-->
+    <string name="token_from_account">Token from Account</string>
+    <string name="token_amount_for_charging">Token Amount for Charging : </string>
+    <string name="special_offers">Special Offers</string>
+
+<!--    دیالوگ های صرافی -->
+    <string name="transfer_successfully">Transfer completed successfully</string>
+    <string name="buy_successfully">Buy completed successfully</string>
+    <string name="sell_successfully">Transfer completed successfully</string>
+    <string name="transaction_deposit">Transaction is queued for deposit</string>
+    <string name="deposit_notification">You will see the deposit notification in your
+bank statement shortly.</string>
+    <string name="transaction_serial">Transaction Serial :</string>
+    <string name="view_explorer">View on Explorer</string>
+
 
 </resources>

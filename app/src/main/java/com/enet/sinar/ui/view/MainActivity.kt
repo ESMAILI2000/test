@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                                 inclusive = true
                             }
                         }
-                    }, onDarkThemeClicked = onToggleDarkTheme // ارسال تابع تغییر تم
+                    }
                 )
             }
 

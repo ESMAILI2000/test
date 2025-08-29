@@ -42,6 +42,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -139,7 +140,9 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
                     .padding(top = 24.dp)
             )
             Text(
-                text = "بازیابی رمز عبور",
+                text = stringResource(
+                    id = R.string.password_recovery
+                ),
                 style = MaterialTheme.typography.displayLarge,
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
@@ -184,7 +187,9 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
                             focusedTextColor = NationsBlue
                         ),
                         placeholder = {
-                            Text("شماره تلفن",
+                            Text(stringResource(
+                                id = R.string.get_code
+                            ),
                                 fontFamily = FontFamily(Font(R.font.ir_medium)),
                                 color = GrayC,
                                 fontSize = 12.sp)
@@ -271,7 +276,9 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
                         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl ){
                             Box(modifier = Modifier.fillMaxWidth(1f)){
                                 Text(
-                                    text = " ارسال مجدد کد بعد از:",
+                                    text =  stringResource(
+                                        id = R.string.resend_after
+                                    ),
                                     Modifier.align(Alignment.CenterStart),
                                     style = MaterialTheme.typography.labelLarge.copy(fontSize = 16.sp),
                                     color = Gunmetal,
@@ -297,7 +304,9 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
                                 onValueChange = { password = it },
                                 Modifier
                                     .fillMaxWidth(),
-                                label = { Text("رمز عبور جدید",
+                                label = { Text( stringResource(
+                                    id = R.string.new_password
+                                ),
                                     fontFamily = FontFamily(Font(R.font.ir_medium)),
                                     fontSize = 12.sp) },
                                 colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -331,7 +340,9 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
                                 onValueChange = { rePassword = it },
                                 Modifier
                                     .fillMaxWidth(),
-                                label = { Text("تکرار رمز عبور جدید",
+                                label = { Text(stringResource(
+                                    id = R.string.confirm_new_password
+                                ),
                                     fontFamily = FontFamily(Font(R.font.ir_medium)),
                                     fontSize = 12.sp) },
                                 colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -392,7 +403,13 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
                         disabledContainerColor = GrayA
                     )
                 ) {
-                    Text( if (step == 1)"دریافت کد" else if (step == 2)"ارسال مجدد" else "تغییر گذرواژه",
+                    Text( if (step == 1) stringResource(
+                        id = R.string.get_code
+                    ) else if (step == 2)stringResource(
+                        id = R.string.resend
+                    ) else  stringResource(
+                        id = R.string.change_password
+                    ),
                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                         fontSize = 14.sp)
                     Spacer(modifier = Modifier.width(8.dp))
@@ -419,7 +436,7 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
 
 
         Text(
-            text = "ورژن 1.0.0",
+            text = stringResource(id = R.string.app_version),
             Modifier
                 .padding(bottom = 54.dp, end = 0.dp)
                 .align(Alignment.BottomCenter),

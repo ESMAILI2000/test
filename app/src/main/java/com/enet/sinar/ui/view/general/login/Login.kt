@@ -1,6 +1,7 @@
 package com.enet.sinar.ui.view.general.login
 
 import AppSection
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -58,11 +59,13 @@ import androidx.compose.ui.unit.sp
 import com.enet.sinar.R
 import com.enet.sinar.ui.theme.Background
 import com.enet.sinar.ui.theme.Blue200
+import com.enet.sinar.ui.theme.Err
 import com.enet.sinar.ui.theme.GrayA
 import com.enet.sinar.ui.theme.GrayC
 import com.enet.sinar.ui.theme.GrayE
 import com.enet.sinar.ui.theme.GrayF
 import com.enet.sinar.ui.theme.Gunmetal
+import com.enet.sinar.ui.theme.NationsBlue
 import com.enet.sinar.ui.theme.Primary
 import com.enet.sinar.ui.theme.SinarTheme
 import com.enet.sinar.ui.utility.MySharedPreferences.getIsEn
@@ -77,7 +80,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
 
     var expanded by remember { mutableStateOf(false) }
 
-     var captchaText by remember { mutableStateOf(generateCaptcha()) }
+    var captchaText by remember { mutableStateOf(generateCaptcha()) }
 
     var phoneNumber by remember { mutableStateOf("")}
     var fullName by remember { mutableStateOf("") }
@@ -85,9 +88,11 @@ fun LoginScreen(modifier: Modifier = Modifier,
     var userId by remember { mutableStateOf("") } // شماره دانشجویی یا کد پرسنلی
     var password by remember { mutableStateOf("") }
     var captchaInput by remember { mutableStateOf("") }
-    var testCapcha by remember { mutableStateOf("") }
     val context = LocalContext.current
-    var error by remember { mutableStateOf(false) }
+    var errorUserId by remember { mutableStateOf(false) }
+    var errorPassword by remember { mutableStateOf(false) }
+    var errorCapcha by remember { mutableStateOf(false) }
+    var errorPhoneNumber by remember { mutableStateOf(false) }
     var isEn by remember { mutableStateOf(getIsEn(context)) }
 
     val layoutDirection = if (isEn) LayoutDirection.Rtl else LayoutDirection.Ltr
@@ -115,7 +120,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
                         .padding(top = 24.dp)
                 )
                 Text(
-                    text = stringResource(id = R.string.login_title),
+                    text = stringResource(id = R.string.login),
                     style = MaterialTheme.typography.displayLarge,
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
@@ -124,7 +129,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
                     color = Gunmetal
                 )
                 Text(
-                    text = stringResource(id = R.string.login_instruction),
+                    text = stringResource(id = R.string.enter_your_information_accurately),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 8.dp),
@@ -142,8 +147,8 @@ fun LoginScreen(modifier: Modifier = Modifier,
                         .padding(vertical = 20.dp)
                         .align(Alignment.CenterHorizontally)
                 ) {
-                    var loginType by remember { mutableStateOf(LoginType.CitizenRegister) }
-                    var isAcademic by remember { mutableStateOf(false) }
+                    var loginType by remember { mutableStateOf(LoginType.AcademicLogin) }
+                    var isAcademic by remember { mutableStateOf(true) }
 
 
                     RoleSelector(selectedRole = isAcademic) { selected ->
@@ -165,51 +170,95 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     onValueChange = { userId = it },
                                     Modifier
                                         .fillMaxWidth(),
-                                    label = { Text(stringResource(id = R.string.field_student_id),
+                                    label = { Text(stringResource(id = R.string.student_staff_id),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp) },
                                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        focusedBorderColor = GrayC,
+                                        focusedBorderColor = NationsBlue,
                                         unfocusedBorderColor = GrayC,
-                                        focusedLabelColor = GrayC,
+                                        focusedLabelColor = NationsBlue,
                                         unfocusedLabelColor = GrayC,
-                                        cursorColor = GrayC
+                                        focusedLeadingIconColor = NationsBlue,
+                                        unfocusedLeadingIconColor = GrayC,
+                                        cursorColor = GrayC,
+                                        errorBorderColor = Err,
+                                        errorLeadingIconColor = Err,
+                                        errorTextColor = Err,
+                                        errorLabelColor = Err,
+                                        focusedTextColor = NationsBlue,
+                                        unfocusedTextColor = GrayC
                                     ),
                                     leadingIcon = {
                                         Icon(
                                             painter = painterResource(id = R.drawable.vc_school),
                                             contentDescription = null,
-                                            tint = GrayC
                                         )
                                     },
-                                    shape = RoundedCornerShape(12.dp)
+                                    shape = RoundedCornerShape(12.dp),
+                                    isError = errorUserId
                                 )
+
+                                AnimatedVisibility(
+                                    visible = if (errorUserId) true else false,
+                                ){
+                                    Row(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(top = 8.dp),
+                                        horizontalArrangement = Arrangement.End
+                                    ) {
+                                        Text(
+                                            text = stringResource(id = R.string.error_student_id),
+                                            Modifier
+                                                .fillMaxWidth(0.9f)
+                                                .padding(end = 4.dp),
+                                            fontSize = 14.sp,
+                                            fontFamily = FontFamily(Font( R.font.ir_regular)),
+                                            color = Err,
+                                            maxLines = 1,
+                                            textAlign = TextAlign.End,
+                                            overflow = TextOverflow.Clip,
+//                        fontWeight = 500
+                                        )
+                                        Icon(painter = painterResource(id = R.drawable.vc_mood_sad) ,
+                                            contentDescription = null,
+                                            tint = Err
+                                        )
+                                    }
+                                }
 
                                 OutlinedTextField(
                                     value = password,
                                     onValueChange = { password = it },
                                     Modifier
                                         .fillMaxWidth(),
-                                    label = { Text(stringResource(id = R.string.field_password),
+                                    label = { Text(stringResource(id = R.string.password),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp) },
                                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        focusedBorderColor = GrayC,
+                                        focusedBorderColor = NationsBlue,
                                         unfocusedBorderColor = GrayC,
-                                        focusedLabelColor = GrayC,
+                                        focusedLabelColor = NationsBlue,
                                         unfocusedLabelColor = GrayC,
-                                        cursorColor = GrayC
+                                        cursorColor = GrayC,
+                                        errorBorderColor = Err,
+                                        errorLeadingIconColor = Err,
+                                        errorTextColor = Err,
+                                        errorLabelColor = Err,
+                                        focusedLeadingIconColor = NationsBlue,
+                                        unfocusedLeadingIconColor = GrayC,
+                                        focusedTextColor = NationsBlue,
+                                        unfocusedTextColor = GrayC
                                     ),
                                     leadingIcon = {
                                         Icon(
                                             painter = painterResource(id = R.drawable.vc_lock_open),
                                             contentDescription = null,
-                                            tint = GrayC
                                         )
                                     },
                                     shape = RoundedCornerShape(12.dp),
                                     visualTransformation = PasswordVisualTransformation(),
-
+                                    isError = errorPassword
                                     )
 
                                 Row {
@@ -219,21 +268,28 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                         Modifier
                                             .fillMaxWidth(0.60f)
                                             .padding(end = 8.dp),
-                                        label = { Text(stringResource(id = R.string.field_captcha),
+                                        label = { Text(stringResource(id = R.string.enter_the_captcha),
                                             fontFamily = FontFamily(Font(R.font.ir_medium)),
                                             fontSize = 12.sp) },
                                         colors = TextFieldDefaults.outlinedTextFieldColors(
-                                            focusedBorderColor = GrayC,
+                                            focusedBorderColor = NationsBlue,
                                             unfocusedBorderColor = GrayC,
-                                            focusedLabelColor = GrayC,
+                                            focusedLabelColor = NationsBlue,
                                             unfocusedLabelColor = GrayC,
-                                            cursorColor = GrayC
+                                            cursorColor = GrayC,
+                                            errorBorderColor = Err,
+                                            errorLeadingIconColor = Err,
+                                            errorTextColor = Err,
+                                            errorLabelColor = Err,
+                                            focusedLeadingIconColor = NationsBlue,
+                                            unfocusedLeadingIconColor = GrayC,
+                                            focusedTextColor = NationsBlue,
+                                            unfocusedTextColor = GrayC
                                         ),
                                         leadingIcon = {
                                             Icon(
                                                 painter = painterResource(id = R.drawable.vc_shield_half),
                                                 contentDescription = null,
-                                                tint = GrayC
                                             )
                                         },
                                         shape = RoundedCornerShape(12.dp)
@@ -248,14 +304,14 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                         .align(Alignment.Start)
                                 ) {
                                     Text(
-                                        text = stringResource(id = R.string.link_forgot_password),
+                                        text = stringResource(id = R.string.forgot_password),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp,
                                         color = Gunmetal,
                                     )
 
                                     Text(
-                                        stringResource(id = R.string.link_recover_password),
+                                        stringResource(id = R.string.recover_password),
                                         Modifier
                                             .pointerInput(Unit) {
                                                 detectTapGestures {
@@ -293,21 +349,28 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     onValueChange = { fullName = it },
                                     Modifier
                                         .fillMaxWidth(),
-                                    label = { Text(stringResource(id = R.string.field_full_name),
+                                    label = { Text(stringResource(id = R.string.full_name),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp) },
                                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        focusedBorderColor = GrayC,
+                                        focusedBorderColor = NationsBlue,
                                         unfocusedBorderColor = GrayC,
-                                        focusedLabelColor = GrayC,
+                                        focusedLabelColor = NationsBlue,
                                         unfocusedLabelColor = GrayC,
-                                        cursorColor = GrayC
+                                        cursorColor = GrayC,
+                                        errorBorderColor = Err,
+                                        errorLeadingIconColor = Err,
+                                        errorTextColor = Err,
+                                        errorLabelColor = Err,
+                                        focusedLeadingIconColor = NationsBlue,
+                                        unfocusedLeadingIconColor = GrayC,
+                                        focusedTextColor = NationsBlue,
+                                        unfocusedTextColor = GrayC
                                     ),
                                     leadingIcon = {
                                         Icon(
                                             painter = painterResource(id = R.drawable.vc_user),
                                             contentDescription = null,
-                                            tint = GrayC
                                         )
                                     },
                                     shape = RoundedCornerShape(12.dp)
@@ -318,24 +381,32 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     onValueChange = { phoneNumber = it },
                                     Modifier
                                         .fillMaxWidth(),
-                                    label = { Text(stringResource(id = R.string.field_phone_number),
+                                    label = { Text(stringResource(id = R.string.phone_number),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp) },
                                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        focusedBorderColor = GrayC,
+                                        focusedBorderColor = NationsBlue,
                                         unfocusedBorderColor = GrayC,
-                                        focusedLabelColor = GrayC,
+                                        focusedLabelColor = NationsBlue,
                                         unfocusedLabelColor = GrayC,
-                                        cursorColor = GrayC
+                                        cursorColor = GrayC,
+                                        errorBorderColor = Err,
+                                        errorLeadingIconColor = Err,
+                                        errorTextColor = Err,
+                                        errorLabelColor = Err,
+                                        focusedLeadingIconColor = NationsBlue,
+                                        unfocusedLeadingIconColor = GrayC,
+                                        focusedTextColor = NationsBlue,
+                                        unfocusedTextColor = GrayC
                                     ),
                                     leadingIcon = {
                                         Icon(
                                             painter = painterResource(id = R.drawable.vc_phone_call),
                                             contentDescription = null,
-                                            tint = GrayC
                                         )
                                     },
-                                    shape = RoundedCornerShape(12.dp)
+                                    shape = RoundedCornerShape(12.dp),
+                                    isError = errorPhoneNumber
                                 )
 
                                 OutlinedTextField(
@@ -343,26 +414,33 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     onValueChange = { password = it },
                                     Modifier
                                         .fillMaxWidth(),
-                                    label = { Text(stringResource(id = R.string.field_password),
+                                    label = { Text(stringResource(id = R.string.password),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp) },
                                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        focusedBorderColor = GrayC,
+                                        focusedBorderColor = NationsBlue,
                                         unfocusedBorderColor = GrayC,
-                                        focusedLabelColor = GrayC,
+                                        focusedLabelColor = NationsBlue,
                                         unfocusedLabelColor = GrayC,
-                                        cursorColor = GrayC
+                                        cursorColor = GrayC,
+                                        errorBorderColor = Err,
+                                        errorLeadingIconColor = Err,
+                                        errorTextColor = Err,
+                                        errorLabelColor = Err,
+                                        focusedLeadingIconColor = NationsBlue,
+                                        unfocusedLeadingIconColor = GrayC,
+                                        focusedTextColor = NationsBlue,
+                                        unfocusedTextColor = GrayC
                                     ),
                                     leadingIcon = {
                                         Icon(
                                             painter = painterResource(id = R.drawable.vc_lock_open),
                                             contentDescription = null,
-                                            tint = GrayC
                                         )
                                     },
                                     shape = RoundedCornerShape(12.dp),
                                     visualTransformation = PasswordVisualTransformation(),
-
+                                    isError = errorPassword
                                     )
 
                                 Row {
@@ -372,21 +450,28 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                         Modifier
                                             .fillMaxWidth(0.60f)
                                             .padding(end = 8.dp),
-                                        label = { Text(stringResource(id = R.string.field_captcha),
+                                        label = { Text(stringResource(id = R.string.enter_the_captcha),
                                             fontFamily = FontFamily(Font(R.font.ir_medium)),
                                             fontSize = 12.sp) },
                                         colors = TextFieldDefaults.outlinedTextFieldColors(
-                                            focusedBorderColor = GrayC,
+                                            focusedBorderColor = NationsBlue,
                                             unfocusedBorderColor = GrayC,
-                                            focusedLabelColor = GrayC,
+                                            focusedLabelColor = NationsBlue,
                                             unfocusedLabelColor = GrayC,
-                                            cursorColor = GrayC
+                                            cursorColor = GrayC,
+                                            errorBorderColor = Err,
+                                            errorLeadingIconColor = Err,
+                                            errorTextColor = Err,
+                                            errorLabelColor = Err,
+                                            focusedLeadingIconColor = NationsBlue,
+                                            unfocusedLeadingIconColor = GrayC,
+                                            focusedTextColor = NationsBlue,
+                                            unfocusedTextColor = GrayC
                                         ),
                                         leadingIcon = {
                                             Icon(
                                                 painter = painterResource(id = R.drawable.vc_shield_half),
                                                 contentDescription = null,
-                                                tint = GrayC
                                             )
                                         },
                                         shape = RoundedCornerShape(12.dp)
@@ -452,7 +537,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     disabledContainerColor = GrayE
                                 )
                             ) {
-                                Text(stringResource(id = R.string.link_create_account),
+                                Text(stringResource(id = R.string.create_account),
                                     fontFamily = FontFamily(Font(R.font.ir_medium)),
                                     fontSize = 14.sp)
                                 Spacer(modifier = Modifier.width(8.dp))
@@ -467,7 +552,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     .padding(0.dp)
                             ) {
                                 Text(
-                                    text = stringResource(id = R.string.login_title_citizen),
+                                    text = stringResource(id = R.string.login),
                                     color = Primary,
                                     fontFamily = FontFamily(Font(R.font.ir_bold)),
                                     fontSize = 14.sp,
@@ -492,24 +577,32 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     onValueChange = { phoneNumber = it },
                                     Modifier
                                         .fillMaxWidth(),
-                                    label = { Text(stringResource(id = R.string.field_phone_number),
+                                    label = { Text(stringResource(id = R.string.phone_number),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp) },
                                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        focusedBorderColor = GrayC,
+                                        focusedBorderColor = NationsBlue,
                                         unfocusedBorderColor = GrayC,
-                                        focusedLabelColor = GrayC,
+                                        focusedLabelColor = NationsBlue,
                                         unfocusedLabelColor = GrayC,
-                                        cursorColor = GrayC
+                                        cursorColor = GrayC,
+                                        errorBorderColor = Err,
+                                        errorLeadingIconColor = Err,
+                                        errorTextColor = Err,
+                                        errorLabelColor = Err,
+                                        focusedLeadingIconColor = NationsBlue,
+                                        unfocusedLeadingIconColor = GrayC,
+                                        focusedTextColor = NationsBlue,
+                                        unfocusedTextColor = GrayC
                                     ),
                                     leadingIcon = {
                                         Icon(
                                             painter = painterResource(id = R.drawable.vc_phone_call),
                                             contentDescription = null,
-                                            tint = GrayC
                                         )
                                     },
-                                    shape = RoundedCornerShape(12.dp)
+                                    shape = RoundedCornerShape(12.dp),
+                                    isError = errorPhoneNumber
                                 )
 
                                 OutlinedTextField(
@@ -517,26 +610,33 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     onValueChange = { password = it },
                                     Modifier
                                         .fillMaxWidth(),
-                                    label = { Text(stringResource(id = R.string.field_password),
+                                    label = { Text(stringResource(id = R.string.password),
                                         fontFamily = FontFamily(Font(R.font.ir_medium)),
                                         fontSize = 12.sp) },
                                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        focusedBorderColor = GrayC,
+                                        focusedBorderColor = NationsBlue,
                                         unfocusedBorderColor = GrayC,
-                                        focusedLabelColor = GrayC,
+                                        focusedLabelColor = NationsBlue,
                                         unfocusedLabelColor = GrayC,
-                                        cursorColor = GrayC
+                                        cursorColor = GrayC,
+                                        errorBorderColor = Err,
+                                        errorLeadingIconColor = Err,
+                                        errorTextColor = Err,
+                                        errorLabelColor = Err,
+                                        focusedLeadingIconColor = NationsBlue,
+                                        unfocusedLeadingIconColor = GrayC,
+                                        focusedTextColor = NationsBlue,
+                                        unfocusedTextColor = GrayC
                                     ),
                                     leadingIcon = {
                                         Icon(
                                             painter = painterResource(id = R.drawable.vc_lock_open),
                                             contentDescription = null,
-                                            tint = GrayC
                                         )
                                     },
                                     shape = RoundedCornerShape(12.dp),
                                     visualTransformation = PasswordVisualTransformation(),
-
+                                    isError = errorPassword
                                     )
 
                                 Row {
@@ -546,25 +646,32 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                         Modifier
                                             .fillMaxWidth(0.60f)
                                             .padding(end = 8.dp),
-                                        label = { Text(stringResource(id = R.string.field_captcha),
+                                        label = { Text(stringResource(id = R.string.enter_the_captcha),
                                             fontFamily = FontFamily(Font(R.font.ir_medium)),
                                             fontSize = 12.sp) },
                                         colors = TextFieldDefaults.outlinedTextFieldColors(
-                                            focusedBorderColor = GrayC,
+                                            focusedBorderColor = NationsBlue,
                                             unfocusedBorderColor = GrayC,
-                                            focusedLabelColor = GrayC,
+                                            focusedLabelColor = NationsBlue,
                                             unfocusedLabelColor = GrayC,
-                                            cursorColor = GrayC
+                                            cursorColor = GrayC,
+                                            errorBorderColor = Err,
+                                            errorLeadingIconColor = Err,
+                                            errorTextColor = Err,
+                                            errorLabelColor = Err,
+                                            focusedLeadingIconColor = NationsBlue,
+                                            unfocusedLeadingIconColor = GrayC,
+                                            focusedTextColor = NationsBlue,
+                                            unfocusedTextColor = GrayC
                                         ),
                                         leadingIcon = {
                                             Icon(
                                                 painter = painterResource(id = R.drawable.vc_shield_half),
                                                 contentDescription = null,
-                                                tint = GrayC
                                             )
                                         },
                                         shape = RoundedCornerShape(12.dp),
-                                        isError = error,
+                                        isError = errorCapcha,
                                     )
 
                                     CaptchaImage(captchaText = captchaText)
@@ -575,12 +682,11 @@ fun LoginScreen(modifier: Modifier = Modifier,
                             Spacer(modifier = Modifier.height(16.dp))
                             Button(
                                 onClick = {
-                                    error = captchaInput != captchaText
-                                    if (!error){
+                                    errorCapcha = captchaInput != captchaText
+                                    if (!errorCapcha){
                                         onLoginSuccess(AppSection.Student)
-                                        testCapcha = "درست"
                                     }else{
-                                        testCapcha = "اشتباه"
+
                                     }
                                 },
                                 Modifier
@@ -594,7 +700,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     disabledContainerColor = GrayE
                                 )
                             ) {
-                                Text(stringResource(id = R.string.login_title_citizen),
+                                Text(stringResource(id = R.string.login),
                                     fontFamily = FontFamily(Font(R.font.ir_medium)),
                                     fontSize = 14.sp)
                                 Spacer(modifier = Modifier.width(8.dp))
@@ -609,7 +715,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
                                     .padding(0.dp)
                             ) {
                                 Text(
-                                    text = stringResource(id = R.string.link_create_account),
+                                    text = stringResource(id = R.string.create_account),
                                     color = Primary,
                                     fontFamily = FontFamily(Font(R.font.ir_medium)),
                                     fontSize = 14.sp,
