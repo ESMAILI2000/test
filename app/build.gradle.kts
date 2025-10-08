@@ -3,17 +3,19 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id ("com.google.dagger.hilt.android")
+    id("io.realm.kotlin")
+
 }
 
 android {
-    namespace = "com.enet.sinar"
+    namespace = "com.enet.test"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.sinar.university"
+        applicationId = "com.nasir.test"
         minSdk = 26
-        //noinspection ExpiredTargetSdkVersion
-        targetSdk = 29
+        //noinspection OldTargetApi,ExpiredTargetSdkVersion
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -84,4 +86,14 @@ dependencies {
 
     implementation ("com.google.dagger:hilt-android:2.44.2")
     kapt ("com.google.dagger:hilt-compiler:2.44.2")
+
+    implementation("io.realm.kotlin:library-base:1.16.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+
+    implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
 }
